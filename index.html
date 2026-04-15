@@ -5988,9 +5988,9 @@ function NoiteChecklistScreen(props){
     );
   }
   if(screen==='inicio'){
-    /* Missões por horário — Gawande: cada fase no momento certo
-       Se tem rascunho de hoje, retoma de onde parou.
-       Se é turno novo, abre a missão do horário atual. */
+    /* Sempre começa na Missão 1.
+       Se tem rascunho de hoje, retoma da primeira missão incompleta.
+       REGRA: não pular missões por horário — a Vitória faz do início. */
     if(!horaInicio)setHoraInicio(nowTime());
     setShowErr(false);
     var temResps=resps&&Object.keys(resps).length>0;
@@ -6005,15 +6005,8 @@ function NoiteChecklistScreen(props){
       }
       setEtapaIdx(idxRetomar);
     }else{
-      /* Turno novo — abre pela missão do horário atual */
-      var horaAtual=new Date().getHours();
-      var idxHorario=0;
-      if(horaAtual>=22)idxHorario=4;
-      else if(horaAtual>=21)idxHorario=3;
-      else if(horaAtual>=18)idxHorario=2;
-      else if(horaAtual>=15)idxHorario=1;
-      else idxHorario=0;
-      setEtapaIdx(idxHorario);
+      /* Turno novo — sempre começa na missão 1 */
+      setEtapaIdx(0);
     }
     setScreen('checklist');
     return null;
