@@ -6247,56 +6247,38 @@ function SubgerenteNoiteHub(props){
           </div>
         )}
 
-        {/* ── MISSÕES PREVIEW — com destaque na missão do horário atual ── */}
-        {!temRascunho&&(function(){
-          var horaAtual=new Date().getHours();
-          var idxAtivo=0;
-          if(horaAtual>=22)idxAtivo=4;
-          else if(horaAtual>=21)idxAtivo=3;
-          else if(horaAtual>=18)idxAtivo=2;
-          else if(horaAtual>=15)idxAtivo=1;
-          else idxAtivo=0;
-          var missaoAtiva=NOITE_ETAPAS[idxAtivo];
-          return(
-            <div style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'14px',marginBottom:12}}>
-              <div style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:800,color:'#111827',marginBottom:4}}>
-                Seu turno de hoje — 5 missões
-              </div>
-              <div style={{fontSize:11,color:'#6B7280',marginBottom:12}}>
-                Começando pela missão do momento atual
-              </div>
-              {NOITE_ETAPAS.map(function(e,i){
-                var ativa=i===idxAtivo;
-                var passada=i<idxAtivo;
-                return(
-                  <div key={e.id} style={{
-                    display:'flex',alignItems:'center',gap:10,padding:'10px 10px',
-                    marginBottom:6,borderRadius:10,
-                    background:ativa?'#FFF0F1':'transparent',
-                    border:ativa?'1.5px solid #EA1D2C':'1px solid #F3F4F6',
-                    opacity:passada?.5:1
-                  }}>
-                    <span style={{fontSize:18,width:28,textAlign:'center',flexShrink:0}}>{e.emoji}</span>
-                    <div style={{flex:1}}>
-                      <div style={{fontSize:13,fontWeight:ativa?800:600,color:ativa?'#EA1D2C':'#111827'}}>{e.titulo}</div>
-                      <div style={{fontSize:11,color:ativa?'#EA1D2C':'#9CA3AF',fontWeight:600,marginTop:1}}>{e.horario}</div>
-                    </div>
-                    <div style={{display:'flex',alignItems:'center',gap:6}}>
-                      <div style={{fontSize:11,color:ativa?'#EA1D2C':'#9CA3AF'}}>{e.itens.length} itens</div>
-                      {ativa&&<span style={{background:'#EA1D2C',color:'#fff',borderRadius:99,padding:'2px 8px',fontSize:9,fontWeight:800}}>AGORA</span>}
-                      {passada&&<span style={{fontSize:12}}>⏭</span>}
-                    </div>
-                  </div>
-                );
-              })}
-              <button onClick={handleIniciar}
-                style={{width:'100%',padding:'13px',background:'#EA1D2C',color:'#fff',borderRadius:10,
-                  fontFamily:"'Sora',sans-serif",fontSize:14,fontWeight:800,border:'none',cursor:'pointer',marginTop:8}}>
-                Iniciar — {missaoAtiva.emoji} {missaoAtiva.titulo} →
-              </button>
+        {/* ── MISSÕES PREVIEW — todas as 5 missões, sem pular nenhuma ── */}
+        {!temRascunho&&(
+          <div style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'14px',marginBottom:12}}>
+            <div style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:800,color:'#111827',marginBottom:4}}>
+              Seu turno de hoje — 5 missões
             </div>
-          );
-        })()}
+            <div style={{fontSize:11,color:'#6B7280',marginBottom:12}}>
+              Começa sempre pela Missão 1
+            </div>
+            {NOITE_ETAPAS.map(function(e){
+              return(
+                <div key={e.id} style={{
+                  display:'flex',alignItems:'center',gap:10,padding:'10px 10px',
+                  marginBottom:6,borderRadius:10,
+                  border:'1px solid #F3F4F6'
+                }}>
+                  <span style={{fontSize:18,width:28,textAlign:'center',flexShrink:0}}>{e.emoji}</span>
+                  <div style={{flex:1}}>
+                    <div style={{fontSize:13,fontWeight:600,color:'#111827'}}>{e.titulo}</div>
+                    <div style={{fontSize:11,color:'#9CA3AF',fontWeight:600,marginTop:1}}>{e.horario}</div>
+                  </div>
+                  <div style={{fontSize:11,color:'#9CA3AF'}}>{e.itens.length} itens</div>
+                </div>
+              );
+            })}
+            <button onClick={handleIniciar}
+              style={{width:'100%',padding:'13px',background:'#EA1D2C',color:'#fff',borderRadius:10,
+                fontFamily:"'Sora',sans-serif",fontSize:14,fontWeight:800,border:'none',cursor:'pointer',marginTop:8}}>
+              Iniciar turno →
+            </button>
+          </div>
+        )}
 
         {/* ── FEEDBACK DA CEO ── */}
         <FeedbackCEOCard login="vitoria"/>
