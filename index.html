@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<!-- CHECKON v2026.17 | Pastel da Camilla | Documentação no bloco de comentário abaixo -->
+<!-- CHECKON v2026.18 | Pastel da Camilla | Documentação no bloco de comentário abaixo -->
 <head>
 <!--
 ================================================================================
@@ -926,7 +926,27 @@ FIM DA DOCUMENTAÇÃO
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>CheckON – Pastel da Camilla</title>
-<link rel="icon" type="image/png" href="logo.png"/>
+
+<!-- ── FAVICON ── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iI0VBMUQyQyIvPjx0ZXh0IHk9IjI0IiB4PSIxNiIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIj7wn6WfPC90ZXh0Pjwvc3ZnPg=="/>
+<link rel="apple-touch-icon" href="logo.png"/>
+
+<!-- ── OPEN GRAPH (preview WhatsApp / redes sociais) ── -->
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Pastel da Camilla"/>
+<meta property="og:title" content="CheckON — Se seu checklist ainda é na mão, você tá na década errada."/>
+<meta property="og:description" content="Gestão de turno inteligente com score automático, rastreabilidade e visibilidade total da operação. Sem papel. Sem WhatsApp perdido."/>
+<meta property="og:image" content="https://i.ibb.co/5xzywyBr/og-image-v2.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/png"/>
+
+<!-- Twitter Card (Telegram também usa) -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="CheckON — Gestão de turno inteligente"/>
+<meta name="twitter:description" content="Se seu checklist ainda é na mão, você tá na década errada. Conheça o CheckON."/>
+<meta name="twitter:image" content="https://i.ibb.co/5xzywyBr/og-image-v2.jpg"/>
+
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
@@ -963,6 +983,36 @@ textarea,select,input{font-family:inherit}
 a{color:inherit}
 img{display:block;max-width:100%}
 .login-bg{min-height:100vh;background:#EA1D2C;display:flex;align-items:center;justify-content:center;padding:20px;}
+/* ── SPLASH PUBLICITÁRIA ── */
+.splash-bg{min-height:100vh;background:#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;overflow:hidden;position:relative;}
+.splash-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;}
+.splash-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(234,29,44,.28) 0%,transparent 70%);pointer-events:none;}
+.splash-glow2{position:absolute;bottom:-80px;right:-60px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(234,29,44,.12) 0%,transparent 70%);pointer-events:none;}
+.splash-inner{position:relative;z-index:2;width:100%;max-width:400px;padding:40px 28px 48px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.splash-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(234,29,44,.15);border:1px solid rgba(234,29,44,.35);border-radius:99px;padding:6px 16px;margin-bottom:36px;animation:splashBadgeIn .6s ease both;}
+.splash-badge-dot{width:7px;height:7px;border-radius:50%;background:#EA1D2C;animation:splashPulse 1.4s ease-in-out infinite;}
+.splash-badge-txt{font-size:11px;font-weight:800;color:#EA1D2C;letter-spacing:1.5px;text-transform:uppercase;}
+.splash-headline{font-family:'Sora',sans-serif;font-size:clamp(26px,7vw,38px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:20px;animation:splashHeadIn .7s cubic-bezier(.22,1,.36,1) .1s both;}
+.splash-headline em{font-style:normal;color:#EA1D2C;}
+.splash-headline .line-dim{color:rgba(255,255,255,.45);font-size:.85em;}
+.splash-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:44px;animation:splashSubIn .7s ease .2s both;max-width:300px;}
+.splash-cta{width:100%;padding:17px;background:#EA1D2C;color:#fff;border-radius:14px;font-family:'Sora',sans-serif;font-size:16px;font-weight:800;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(234,29,44,.45);animation:splashCtaIn .6s cubic-bezier(.34,1.4,.64,1) .35s both;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;transition:transform .08s,box-shadow .1s,background .1s;}
+.splash-cta:active{transform:scale(.97);background:#c8111e;box-shadow:0 4px 16px rgba(234,29,44,.3);}
+.splash-skip{margin-top:14px;font-size:12px;color:rgba(255,255,255,.28);cursor:pointer;padding:8px;animation:splashSubIn .5s ease .5s both;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.splash-skip:active{color:rgba(255,255,255,.6);}
+.splash-pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:44px;animation:splashSubIn .6s ease .25s both;}
+.splash-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:7px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.65);}
+.splash-pill span{font-size:15px;}
+.splash-logo-area{display:flex;align-items:center;gap:10px;margin-bottom:32px;animation:splashBadgeIn .5s ease .05s both;}
+.splash-logo-circle{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.splash-logo-name{text-align:left;}
+.splash-logo-name b{display:block;font-family:'Sora',sans-serif;font-size:17px;font-weight:900;color:#fff;}
+.splash-logo-name small{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;}
+@keyframes splashBadgeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes splashHeadIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes splashSubIn{from{opacity:0}to{opacity:1}}
+@keyframes splashCtaIn{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes splashPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
 .login-wrapper{width:100%;max-width:340px;animation:loginWrapIn .7s cubic-bezier(.34,1.4,.64,1) both;}
 @keyframes loginWrapIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 .login-card{width:100%;background:#F5F1EF;border-radius:24px;box-shadow:0 16px 48px rgba(0,0,0,.28);position:relative;overflow:visible;}
@@ -982,7 +1032,8 @@ img{display:block;max-width:100%}
 .login-f-input{width:100%;background:#fff;border:1.5px solid #E4DCDA;border-radius:10px;padding:12px 12px 12px 40px;font-size:14px;color:#1A1A1A;transition:border-color .2s,box-shadow .2s;outline:none;-webkit-appearance:none;}
 .login-f-input::placeholder{color:#C0B8B6}
 .login-f-input:focus{border-color:#EA1D2C;box-shadow:0 0 0 3px rgba(234,29,44,.1)}
-.login-btn{width:100%;padding:14px;background:#EA1D2C;color:#fff;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;transition:background .15s,transform .1s;box-shadow:0 4px 14px rgba(234,29,44,.4);}
+.login-btn{width:100%;padding:14px;background:#EA1D2C;color:#fff;border-radius:10px;border:none;font-family:'Sora',sans-serif;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;transition:background .1s,transform .08s;box-shadow:0 4px 14px rgba(234,29,44,.4);-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
+.login-btn:active{transform:scale(.97);background:#c8111e}
 .login-btn:hover{background:#C0111E;transform:translateY(-1px)}
 .login-btn:active{transform:translateY(0)}
 .login-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
@@ -1014,7 +1065,8 @@ img{display:block;max-width:100%}
 .ctx-btn{padding:7px 16px;border-radius:var(--r99);border:1.5px solid var(--line);background:var(--surface);font-size:12px;font-weight:700;color:var(--ink2);transition:all .13s;min-width:52px;min-height:36px;text-align:center}
 .ctx-btn.yes{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
 .ctx-btn.no{border-color:var(--ink4);background:var(--surface2);color:var(--ink3)}
-.start-btn{width:100%;padding:16px;background:var(--brand);color:#fff;border-radius:var(--r12);font-family:'Sora',sans-serif;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s;border:none;box-shadow:var(--sh-brand)}
+.start-btn{width:100%;padding:16px;background:var(--brand);color:#fff;border-radius:var(--r12);font-family:'Sora',sans-serif;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .1s,transform .08s;border:none;box-shadow:var(--sh-brand);-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
+.start-btn:active{transform:scale(.97);background:var(--brand-dark)}
 .start-btn:hover{background:var(--brand-dark);transform:translateY(-2px)}
 .prog-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r12);box-shadow:var(--sh1);padding:16px;margin:12px 16px 0}
 .prog-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
@@ -1051,9 +1103,11 @@ img{display:block;max-width:100%}
 .chk-title{font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;margin-bottom:4px}
 .chk-desc{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:12px}
 .ans-row{display:flex;gap:8px}
-.ans-sim,.ans-nao{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 14px;border-radius:var(--r8);border:1.5px solid var(--line);background:var(--surface2);font-size:14px;font-weight:700;color:var(--ink2);transition:all .13s;cursor:pointer;min-height:48px}
+.ans-sim,.ans-nao{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 14px;border-radius:var(--r8);border:1.5px solid var(--line);background:var(--surface2);font-size:14px;font-weight:700;color:var(--ink2);transition:transform .08s ease,background .1s ease,border-color .1s ease,color .1s ease;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
 .ans-sim:hover{border-color:var(--ok-line);background:var(--ok-bg);color:var(--ok)}
 .ans-nao:hover{border-color:var(--danger-line);background:var(--danger-bg);color:var(--danger)}
+.ans-sim:active{transform:scale(.95);border-color:var(--ok);background:var(--ok-bg)}
+.ans-nao:active{transform:scale(.95);border-color:var(--brand);background:var(--danger-bg)}
 .ans-sim.sel{border-color:var(--ok);background:var(--ok);color:#fff}
 .ans-nao.sel{border-color:var(--brand);background:var(--brand);color:#fff;box-shadow:var(--sh-brand)}
 .req-msg{font-size:11px;color:var(--danger);margin-top:6px;font-weight:600;display:flex;align-items:center;gap:4px}
@@ -1077,9 +1131,10 @@ img{display:block;max-width:100%}
 .fab{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;box-shadow:0 -2px 12px rgba(0,0,0,.08);min-height:var(--fab-h)}
 .fab-inner{width:100%;max-width:var(--content-max);margin:0 auto;display:flex;gap:6px;align-items:center}
 .fab-save{flex:0 0 auto;padding:11px 12px;border-radius:var(--r8);background:var(--surface2);border:1.5px solid var(--line);font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:var(--ink2);transition:all .13s;min-height:44px;white-space:nowrap}
-.fab-send{flex:1;padding:12px 8px;border-radius:var(--r8);background:var(--brand);color:#fff;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;box-shadow:var(--sh-brand);min-height:44px;white-space:nowrap}
+.fab-send{flex:1;padding:12px 8px;border-radius:var(--r8);background:var(--brand);color:#fff;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px;transition:transform .08s ease,background .1s ease,box-shadow .1s ease,opacity .1s ease;box-shadow:var(--sh-brand);min-height:48px;white-space:nowrap;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
 .fab-send:hover{background:var(--brand-dark)}
-.fab-send:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.fab-send:active{transform:scale(.96);background:var(--brand-dark);box-shadow:0 1px 4px rgba(234,29,44,.25)}
+.fab-send:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
 .fab-del{flex:0 0 auto;padding:11px 14px;border-radius:var(--r8);background:var(--surface2);border:1.5px solid var(--line);font-size:17px;min-height:44px;transition:all .13s}
 .fab-del:hover{background:var(--danger-bg);border-color:var(--danger-line)}
 .toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:9px 20px;border-radius:var(--r99);font-size:12px;font-weight:600;z-index:9999;box-shadow:var(--sh3);opacity:0;transition:opacity .22s;pointer-events:none;white-space:nowrap;max-width:90vw}
@@ -1168,7 +1223,6 @@ const SUPABASE_KEY='sb_publishable_zHkABW_ODWxYqIDbcon1kQ_7P5G86ej';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 const SISTEMA='CheckON Pastel da Camilla';
-const WEBHOOK='https://hook.us2.make.com/pz24jw68dgh7c3realu1locfwlq1ny67';
 const WA_GROUP='https://chat.whatsapp.com/G0erwUW5npX4ejKNcU3lT5';
 function openWA(){
   try{
@@ -1182,7 +1236,7 @@ function openWA(){
 }
 const USERS_KEY='konclui_users';
 const SESSION_KEY='konclui_session';
-const VERSION='2026.17';
+const VERSION='2026.18';
 const PWD_2026='158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
 
 (function(){
@@ -1246,20 +1300,7 @@ async function sbSelectRecente(table,dias,filters){
   }catch(e){console.error('SB error:',e);return[];}
 }
 
-async function sendWebhook(txt,ep){
-  try{
-    var body={texto:txt,timestamp:new Date().toISOString(),sistema:SISTEMA,email_destino:'pasteldacamilasuporte@gmail.com',email_assunto:(ep&&ep.assunto)||SISTEMA+' – Relatório',email_html:(ep&&ep.html)||txt.replace(/\n/g,'<br>'),email_texto:txt};
-    var r=await fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!r.ok)console.warn('Webhook retornou '+r.status+' — e-mail pode não ter sido enviado.');
-    return r.ok;
-  }catch(e){console.warn('Webhook falhou:',e);return false;}
-}
-/* Chama sendWebhook e exibe toast suave se falhar — não bloqueia o fluxo */
-async function sendWebhookComAviso(txt,ep,showToastFn){
-  var ok=await sendWebhook(txt,ep);
-  if(!ok&&showToastFn)showToastFn('⚠️ Relatório salvo, mas e-mail não enviado. Verifique a conexão.');
-  return ok;
-}
+/* Webhook removido — notificações via WhatsApp manual */
 
 function Toast(props){return React.createElement('div',{className:'toast'+(props.show?' on':'')},props.msg);}
 function useToast(){
@@ -1791,10 +1832,10 @@ function DPChecklistScreen(props){
     var ok=await sbInsert('dp_checklists',{login:user.login,user_name:user.name,freq:freq,checklist:freqCfg.titulo,data:todayISO(),data_fmt:todayFmt(),hora:nowTime(),tempo_total:tempo,score:score,total:total,falhas:falhas,blocos_concluidos:blocosConcluidos,status:statusGeral,resps:resps,negs:negs,sugestao:(sugestao&&sugestao.atividade?sugestao:{}),ocorrencia:dpCtx.obsOcorrencia||''});
     if(!ok){setSending(false);showToast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.');return;}
     if(sugestao&&sugestao.atividade){await sbInsert('dp_sugestoes',{login:user.login,nome:user.name,checklist:freqCfg.titulo,freq:freq,data:todayISO(),data_fmt:todayFmt(),hora:nowTime(),sugestao:sugestao});}
-    await sendWebhookComAviso(SISTEMA+' — '+freqCfg.titulo+'\n'+user.name+' · '+todayFmt()+(tempo?' · ⏱ '+tempo:'')+'\nStatus: '+statusGeral.toUpperCase()+' · Score: '+score+'/100',{assunto:'[CheckON DP] '+statusGeral.toUpperCase()+' – '+user.name},showToast);
+
     try{localStorage.removeItem(DP_SAVE_KEY);}catch(e){}
     setEnviadoScore(score);setEnviado(true);
-    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},2200);
+    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},900);
   }
 
   function handleLimpar(){if(!window.confirm('Limpar checklist atual?'))return;try{localStorage.removeItem(DP_SAVE_KEY);}catch(e){}setResps({});setNegs({});setShowErr(false);setValErrs([]);setHoraInicio(null);setSugestao({});setSugestaoAberta(false);setScreen('freq');}
@@ -2030,10 +2071,10 @@ function GerChecklistScreen(props){
     var ok=await sbInsert('ger_checklists',{login:user.login,user_name:user.name,turno:ident&&ident.turno,data:todayISO(),data_fmt:todayFmt(),hora:hora,tempo_total:tempo,score:score,total:total,falhas:falhas,criticos:criticos,status:statusGeral,resps:resps,negs:negs});
     if(!ok){setSending(false);showToast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.');return;}
     setIdent(function(prev){return Object.assign({},prev,{horaFim:hora});});
-    await sendWebhookComAviso(SISTEMA+' — GERÊNCIA\n'+user.name+' · '+todayFmt()+(tempo?' · ⏱ '+tempo:'')+'\nStatus: '+statusGeral.toUpperCase()+' · Score: '+score+'/100',{assunto:'[CheckON Gerência] '+statusGeral.toUpperCase()+' – '+user.name},showToast);
+
     try{localStorage.removeItem(GER_SAVE_KEY);}catch(e){}
     setEnviadoGer(true);
-    setTimeout(function(){setSending(false);setEnviadoGer(false);setScreen('summary');},2200);
+    setTimeout(function(){setSending(false);setEnviadoGer(false);setScreen('summary');},900);
   }
   function handleLimpar(){if(!window.confirm('Limpar checklist?'))return;try{localStorage.removeItem(GER_SAVE_KEY);}catch(e){}setIdent(null);setTurno(null);setResps({});setNegs({});setShowErr(false);setValErrs([]);setScreen('entry');}
   var tLabel=turno==='manha'?'🌅 Manhã':'🌙 Tarde/Noite';
@@ -2126,7 +2167,7 @@ function ChecklistScreen(props){
     var ok=await sbInsert('checklists',{login:user.login,user_name:nome,turno:ident.turno,data:todayISO(),data_fmt:ident.data,hora:hora,tempo_total:tempo,score:score,total:total,falhas:falhas,criticos:criticos,status:status,resps:resps,negs:negs,ff:{obsGerais:ff.obsGerais,relato:relato||''}});
     if(!ok){setSending(false);showToast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.');return;}
     var tLabel=ident.turno==='manha'?'Manhã':'Tarde/Noite';
-    await sendWebhookComAviso(SISTEMA+'\n'+nome+' · '+tLabel+' · '+ident.data+(tempo?' · ⏱ '+tempo:'')+'\nScore: '+score+'/100',{assunto:'[CheckON] '+status+' – '+nome},showToast);
+
     setSending(false);try{localStorage.removeItem(CK_USER_KEY);}catch(e){}setScreen('summary');
   }
   function handleLimpar(){if(!window.confirm('Limpar checklist?'))return;try{localStorage.removeItem(CK_USER_KEY);}catch(e){}setIdent(null);setResps({});setNegs({});setFF({obsGerais:''});setShowErr(false);setValErrs([]);setTempoTotal('');setScreen('entry');}
@@ -2147,11 +2188,7 @@ function SubgerCEORow(props){
   var stBg=st==='Operação controlada'?'#D1FAE5':st==='Atenção'?'#FEF3C7':'#FEE2E2';
   var stC=st==='Operação controlada'?'#065F46':st==='Atenção'?'#92400E':'#991B1B';
   var allSgItems=SUBGER_ETAPAS.reduce(function(a,e){return a.concat(e.itens);},[]);
-  var etapasDef=[
-    {titulo:'Abertura do Turno',ids:SUBGER_ETAPAS[0].itens.map(function(i){return i.id;})},
-    {titulo:'Controle da Operação',ids:SUBGER_ETAPAS[1].itens.map(function(i){return i.id;})},
-    {titulo:'Fechamento do Turno Manhã',ids:SUBGER_ETAPAS[2].itens.map(function(i){return i.id;})}
-  ];
+  var etapasDef=SUBGER_ETAPAS.map(function(e){return{titulo:e.titulo,ids:e.itens.map(function(i){return i.id;})};});
   return(
     <div style={{margin:'8px 16px 0',background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',overflow:'hidden'}}>
       <div onClick={function(){setOpen(function(o){return !o;});}} style={{padding:'13px 14px',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'space-between',gap:8}}>
@@ -2235,6 +2272,11 @@ function CEODashboard(props){
       if(tab==='overview'||tab==='subgerencia'||tab==='alertas'||tab==='turnos'||tab==='ranking'){var sg=await sbSelectRecente('subger_checklists',90);setSubgerData(sg);}
       if(tab==='overview'||tab==='vitoria'||tab==='alertas'||tab==='turnos'||tab==='ranking'){var nt=await sbSelectRecente('subger_noite_checklists',90);setNoiteData(nt);}
       if(tab==='overview'||tab==='pendencias'){var pd=await sbSelect('checkon_pendencias');setPendData(pd.filter(function(r){return r.status==='aberta';}));}
+      if(tab==='vozes'){
+        if(subgerData.length===0){var sgv=await sbSelectRecente('subger_checklists',90);setSubgerData(sgv);}
+        if(noiteData.length===0){var ntv=await sbSelectRecente('subger_noite_checklists',90);setNoiteData(ntv);}
+        if(dpData.length===0){var dpv=await sbSelectRecente('dp_checklists',90);setDpData(dpv);}
+      }
       setLoading(false);
     }
     load();
@@ -3042,7 +3084,7 @@ function CEODashboardNew(props){
     ).sort(function(a,b){return b.hoje-a.hoje;}).slice(0,12);
   },[allData,hoje]);
 
-  var TABS=[['overview','Geral'],['subgerencia','Gabriela'],['vitoria','Vitória'],['gerencia','Gerência'],['dp','DP'],['pendencias','Pendências'],['ranking','Ranking'],['alertas','Alertas'],['turnos','Turnos']];
+  var TABS=[['overview','Geral'],['subgerencia','Gabriela'],['vitoria','Vitória'],['gerencia','Gerência'],['dp','DP'],['pendencias','Pendências'],['vozes','💬 Vozes'],['ranking','Ranking'],['alertas','Alertas'],['turnos','Turnos']];
 
   /* helpers visuais */
   function ScPill(p){var c=p.sc>=80?'#16A34A':p.sc>=60?'#D97706':'#DC2626';return<span style={{fontFamily:"'Sora',sans-serif",fontSize:15,fontWeight:900,color:c}}>{p.sc}</span>;}
@@ -3260,6 +3302,145 @@ function CEODashboardNew(props){
           );})}
         </div>
       )}
+
+      {/* VOZES DA EQUIPE */}
+      {tab==='vozes'&&(function(){
+        /* Coleta todos relatos + negs + sugestoes + ocorrencias */
+        var itensRelato=[];
+        /* Subgerência manhã */
+        subgerData.filter(function(d){return d.relato&&d.relato.trim();}).forEach(function(d){
+          itensRelato.push({tipo:'relato',pessoa:'Gabriela',turno:'🌅 Manhã',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.relato,score:d.score,status:d.status});
+        });
+        /* Subgerência noite */
+        noiteData.filter(function(d){return d.relato&&d.relato.trim();}).forEach(function(d){
+          itensRelato.push({tipo:'relato',pessoa:'Vitória',turno:'🌙 Noite',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.relato,score:d.score,status:d.status});
+        });
+        /* DP ocorrências */
+        dpData.filter(function(d){return d.ocorrencia&&d.ocorrencia.trim();}).forEach(function(d){
+          itensRelato.push({tipo:'ocorrencia',pessoa:'Viviane',turno:'🗂️ DP',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.ocorrencia,score:d.score,status:d.status});
+        });
+        /* Sugestões */
+        var todasSugs=[];
+        subgerData.filter(function(d){return d.sugestao&&d.sugestao.atividade;}).forEach(function(d){
+          todasSugs.push({pessoa:'Gabriela',turno:'🌅 Manhã',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.sugestao.atividade});
+        });
+        noiteData.filter(function(d){return d.sugestao&&d.sugestao.atividade;}).forEach(function(d){
+          todasSugs.push({pessoa:'Vitória',turno:'🌙 Noite',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.sugestao.atividade});
+        });
+        dpSugs.forEach(function(s){
+          if(s.sugestao&&s.sugestao.atividade)todasSugs.push({pessoa:'Viviane',turno:'🗂️ DP',data:s.data_fmt||s.data,hora:s.hora||'',texto:s.sugestao.atividade});
+        });
+        /* Negs detalhados — só itens com detalhe ou aconteceu relevante */
+        var todosNegs=[];
+        function extrairNegs(registros,pessoa,turnoLabel){
+          registros.forEach(function(d){
+            var negs=d.negs||{};var resps=d.resps||{};
+            Object.keys(resps).forEach(function(id){
+              if(resps[id]==='nao'){
+                var neg=negs[id]||{};
+                if(neg.aconteceu||neg.detalhe){
+                  todosNegs.push({pessoa:pessoa,turno:turnoLabel,data:d.data_fmt||d.data,hora:d.hora||'',itemId:id,aconteceu:neg.aconteceu||'',feito:neg.feito||'',detalhe:neg.detalhe||'',prox:neg.prox||''});
+                }
+              }
+            });
+          });
+        }
+        extrairNegs(subgerData,'Gabriela','🌅 Manhã');
+        extrairNegs(noiteData,'Vitória','🌙 Noite');
+
+        /* Ordena por data desc */
+        itensRelato.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+        todasSugs.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+        todosNegs.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+
+        var corPessoa={'Gabriela':'#EA1D2C','Vitória':'#7C3AED','Viviane':'#0891B2','Derik':'#1E40AF'};
+
+        return(
+          <div style={{paddingBottom:24}}>
+            {/* Header */}
+            <div style={{margin:'12px 16px 0',background:'#EA1D2C',borderRadius:12,padding:'14px 16px',color:'#fff'}}>
+              <div style={{fontFamily:"'Sora',sans-serif",fontSize:17,fontWeight:900}}>💬 Vozes da Equipe</div>
+              <div style={{fontSize:11,opacity:.75,marginTop:3}}>Relatos, observações, sugestões e ocorrências da equipe</div>
+            </div>
+
+            {/* Relatos */}
+            <div style={{margin:'14px 16px 0'}}>
+              <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
+                📝 Relatos de turno ({itensRelato.length})
+              </div>
+              {itensRelato.length===0&&<div style={{padding:'18px',background:'#fff',borderRadius:10,border:'1px solid #E5E7EB',textAlign:'center',color:'#9CA3AF',fontSize:12}}>Nenhum relato ainda.</div>}
+              {itensRelato.map(function(r,i){
+                var cor=corPessoa[r.pessoa]||'#EA1D2C';
+                var stBg=r.status==='ok'?'#D1FAE5':r.status==='atencao'?'#FEF3C7':'#FEE2E2';
+                var stC=r.status==='ok'?'#065F46':r.status==='atencao'?'#92400E':'#991B1B';
+                var stL=r.status==='ok'?'OK':r.status==='atencao'?'Atenção':'Crítico';
+                return(
+                  <div key={i} style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'13px 14px',marginBottom:8,borderLeft:'4px solid '+cor}}>
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:6}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6}}>
+                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:cor}}>{r.pessoa}</span>
+                        <span style={{fontSize:11,color:'#6B7280'}}>{r.turno}</span>
+                        <span style={{fontSize:10,color:'#9CA3AF'}}>{r.data}{r.hora?' · '+r.hora:''}</span>
+                      </div>
+                      <div style={{display:'flex',alignItems:'center',gap:6}}>
+                        {r.score!==undefined&&<span style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:900,color:r.score>=80?'#16A34A':r.score>=60?'#D97706':'#DC2626'}}>{r.score}</span>}
+                        <span style={{background:stBg,color:stC,borderRadius:99,padding:'2px 7px',fontSize:9,fontWeight:700}}>{stL}</span>
+                      </div>
+                    </div>
+                    <div style={{fontSize:13,color:'#111827',lineHeight:1.6,background:'#F9FAFB',borderRadius:8,padding:'10px 12px'}}>{r.texto}</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Sugestões */}
+            {todasSugs.length>0&&(
+              <div style={{margin:'14px 16px 0'}}>
+                <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
+                  💡 Sugestões da equipe ({todasSugs.length})
+                </div>
+                {todasSugs.map(function(s,i){
+                  var cor=corPessoa[s.pessoa]||'#EA1D2C';
+                  return(
+                    <div key={i} style={{background:'#F0F9FF',borderRadius:12,border:'1px solid #BAE6FD',padding:'13px 14px',marginBottom:8,borderLeft:'4px solid #0891B2'}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}>
+                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:cor}}>{s.pessoa}</span>
+                        <span style={{fontSize:11,color:'#6B7280'}}>{s.turno}</span>
+                        <span style={{fontSize:10,color:'#9CA3AF'}}>{s.data}{s.hora?' · '+s.hora:''}</span>
+                      </div>
+                      <div style={{fontSize:13,color:'#0C4A6E',lineHeight:1.6}}>{s.texto}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Negs detalhados */}
+            {todosNegs.length>0&&(
+              <div style={{margin:'14px 16px 0'}}>
+                <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
+                  🔴 Registros detalhados de não conformidade ({todosNegs.length})
+                </div>
+                {todosNegs.slice(0,30).map(function(n,i){
+                  var cor=corPessoa[n.pessoa]||'#EA1D2C';
+                  return(
+                    <div key={i} style={{background:'#fff',borderRadius:10,border:'1px solid #FECACA',padding:'11px 13px',marginBottom:6,borderLeft:'3px solid #DC2626'}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:5}}>
+                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:cor}}>{n.pessoa}</span>
+                        <span style={{fontSize:10,color:'#6B7280'}}>{n.turno} · {n.data}</span>
+                      </div>
+                      {n.aconteceu&&<div style={{fontSize:12,color:'#374151',marginBottom:3}}><strong style={{color:'#DC2626'}}>O que:</strong> {n.aconteceu}</div>}
+                      {n.feito&&<div style={{fontSize:12,color:'#374151',marginBottom:3}}><strong>Ação:</strong> {n.feito}</div>}
+                      {n.detalhe&&<div style={{fontSize:12,color:'#6B7280',fontStyle:'italic'}}>{n.detalhe}</div>}
+                      {n.prox&&<div style={{fontSize:11,fontWeight:700,marginTop:4,color:n.prox==='Sim, fica pendente'?'#D97706':'#16A34A'}}>{n.prox==='Sim, fica pendente'?'⚠️ Ficou pendente':'✅ Encerrado'}</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* RANKING */}
       {tab==='ranking'&&(
@@ -3608,48 +3789,188 @@ var SUBGER_SAVE_KEY_PREFIX='checkon_subger_';
 
 /* ── Checklist Gabriela — 3 momentos com horário ── */
 var SUBGER_ETAPAS=[
-  {id:'sg_e1',titulo:'Abertura do Turno',horario:'9h – 11h',emoji:'🌅',itens:[
-    {id:'sg1', critico:false,texto:'Livro de ocorrências e Trello verificados'},
-    {id:'sg2', critico:false,texto:'Grupo da gerência verificado — pendências do turno anterior identificadas'},
-    {id:'sg3', critico:false,texto:'Equipe presente, redistribuída e com função definida'},
-    {id:'sg4', critico:false,texto:'Atrasos e faltas tratados'},
-    {id:'sg5', critico:true, texto:'Saipos, WebCardápio e iFood funcionando'},
-    {id:'sg6', critico:false,texto:'Impressoras, maquininhas, internet e Wi-Fi funcionando'},
-    {id:'sg7', critico:false,texto:'Cozinha pronta — bancadas organizadas, área de trabalho funcional'},
-    {id:'sg8', critico:true, texto:'Insumos e recheios disponíveis — produtos verificados'},
-    {id:'sg9', critico:true, texto:'Itens próximos do vencimento identificados — uso priorizado do mais antigo'},
-    {id:'sg10',critico:false,texto:'Dispense abastecido — mesa e gaveteiro organizados'},
-    {id:'sg11',critico:true, texto:'Produção iniciada'},
-    {id:'sg26',critico:true, texto:'Os recheios da dispensa foram verificados e estão sendo utilizados na ordem correta (mais antigo → mais novo)'}
+
+  /* ══ MISSÃO 1 — Assumir a manhã (8h–9h30) ══
+     9 itens · 4 combos
+     Intenção: você abre a loja. Tudo que encontrar vira sua responsabilidade.
+     Referências: Gawande (contexto antes de executar), Frankl (propósito claro) ══ */
+  {id:'sg_e1',
+   titulo:'Assumir a manhã',
+   intencao:'Você abre a loja agora. Tudo que encontrar vira sua responsabilidade.',
+   horario:'8h – 9h30',
+   emoji:'🌅',
+   missao:1,
+   itens:[
+    /* COMBO 1.1 — PASSAGEM E LEITURA */
+    {id:'sg1', critico:false, combo:'1.1', comboTitulo:'📋 Passagem e leitura',
+     texto:'Passagem do turno da noite recebida — pendências verificadas'},
+    {id:'sg2', critico:false, combo:'1.1', comboTitulo:'📋 Passagem e leitura',
+     texto:'Livro de ocorrências, Trello e grupo da gerência verificados'},
+    /* COMBO 1.2 — CAIXA E SISTEMAS */
+    {id:'sg3', critico:true,  combo:'1.2', comboTitulo:'💰 Caixa e sistemas',
+     texto:'Troco conferido — R$300 no caixa'},
+    {id:'sg6', critico:true,  combo:'1.2', comboTitulo:'💰 Caixa e sistemas',
+     texto:'Saipos, WebCardápio e iFood funcionando'},
+    {id:'sg7', critico:false, combo:'1.2', comboTitulo:'💰 Caixa e sistemas',
+     texto:'Impressoras, maquininhas, internet e Wi-Fi funcionando'},
+    /* COMBO 1.3 — EQUIPE */
+    {id:'sg4', critico:false, combo:'1.3', comboTitulo:'👥 Equipe',
+     texto:'Equipe presente, redistribuída e com função definida'},
+    {id:'sg5', critico:true,  combo:'1.3', comboTitulo:'👥 Equipe',
+     texto:'Atrasos e faltas tratados na escala digital e enviados no grupo'},
+    /* COMBO 1.4 — INSUMOS E COZINHA */
+    {id:'sg8', critico:true,  combo:'1.4', comboTitulo:'🥟 Insumos e cozinha',
+     texto:'Insumos e recheios disponíveis para o turno da manhã'},
+    {id:'sg9', critico:false, combo:'1.4', comboTitulo:'🥟 Insumos e cozinha',
+     texto:'Cozinha organizada e pronta para operação'}
   ]},
-  {id:'sg_e2',titulo:'Controle da Operação',horario:'11h – 13h',emoji:'⚙️',itens:[
-    {id:'sg27',critico:true, texto:'Produção fluindo sem acúmulo'},
-    {id:'sg29',critico:true, texto:'Pedidos parados identificados e tratados'},
-    {id:'sg31',critico:true, texto:'Atrasos tratados antes de impactar cliente'},
-    {id:'sg35',critico:true, texto:'Nenhum colaborador sem direção'},
-    {id:'sg36',critico:true, texto:'Insumos críticos monitorados — reposição antecipada realizada'},
-    {id:'sg38',critico:true, texto:'Não houve falta de insumo por falha de controle'},
-    {id:'sg39',critico:false,texto:'Padrão operacional seguido — nenhuma execução fora do padrão'},
-    {id:'sg41',critico:false,texto:'Checklists da equipe respondidos e validados'},
-    {id:'sg47',critico:true, texto:'Falhas relevantes registradas'},
-    {id:'sg48',critico:true, texto:'Nenhum problema ficou sem responsável'}
+
+  /* ══ MISSÃO 2 — Preparar o pico (9h30–11h) ══
+     5 itens · 2 combos
+     Intenção: o pico começa em breve. Tudo tem que estar pronto antes das 11h.
+     Referências: Fogg (comportamento mínimo), Kahneman (preparação reduz carga cognitiva) ══ */
+  {id:'sg_e2',
+   titulo:'Preparar o pico',
+   intencao:'O pico começa em breve. Tudo tem que estar pronto antes das 11h.',
+   horario:'9h30 – 11h',
+   emoji:'⚡',
+   missao:2,
+   itens:[
+    /* COMBO 2.1 — PRODUÇÃO */
+    {id:'sg10', critico:true,  combo:'2.1', comboTitulo:'🥟 Produção',
+     texto:'Produção iniciada e fluindo sem acúmulo'},
+    {id:'sg26', critico:true,  combo:'2.1', comboTitulo:'🥟 Produção',
+     texto:'Recheios da dispensa verificados — utilizando na ordem correta (mais antigo → mais novo)',
+     especial:'recheio'},
+    {id:'sg11', critico:false, combo:'2.1', comboTitulo:'🥟 Produção',
+     texto:'Dispensa abastecida — mesa e gaveteiro organizados'},
+    /* COMBO 2.2 — DELIVERY */
+    {id:'sg12', critico:true,  combo:'2.2', comboTitulo:'🛵 Delivery',
+     texto:'Delivery alinhado: equipe informada, pedidos em aberto verificados e sistema funcionando'},
+    {id:'sg13', critico:false, combo:'2.2', comboTitulo:'🛵 Delivery',
+     texto:'Insumos críticos conferidos: embalagens, molho verde, ketchup, mostarda, guardanapo e copos'}
   ]},
-  {id:'sg_e3',titulo:'Fechamento do Turno',horario:'13h+',emoji:'✅',itens:[
-    {id:'sg49',critico:false,texto:'Loja organizada para continuidade do dia'},
-    {id:'sg50',critico:true, texto:'Operação está em condição de continuidade'},
-    {id:'sg51',critico:true, texto:'Pendências identificadas e registradas'},
-    {id:'sg52',critico:true, texto:'Falhas relevantes registradas'},
-    {id:'sg53',critico:true, texto:'Problemas encaminhados — nenhum crítico sem responsável'},
-    {id:'sg54',critico:false,texto:'Informações do turno comunicadas para o próximo'}
+
+  /* ══ MISSÃO 3 — Defender o turno (11h–13h) ══
+     9 itens · 3 combos
+     Intenção: agora é o pico. Você controla. A loja depende de você.
+     Referências: Gawande (checklist no momento crítico), Dweck (mindset de crescimento) ══ */
+  {id:'sg_e3',
+   titulo:'Defender o turno',
+   intencao:'Agora é o pico. Você controla. A loja depende de você.',
+   horario:'11h – 13h',
+   emoji:'🔥',
+   missao:3,
+   pico:true,
+   itens:[
+    /* COMBO 3.1 — PICO */
+    {id:'sg27', critico:true,  combo:'3.1', comboTitulo:'🔥 Pico',
+     texto:'Pico 11h–13h: tempo e qualidade mantidos'},
+    {id:'sg28', critico:true,  combo:'3.1', comboTitulo:'🔥 Pico',
+     texto:'Pedidos delivery monitorados e conferidos antes de sair'},
+    {id:'sg29', critico:true,  combo:'3.1', comboTitulo:'🔥 Pico',
+     texto:'Pedidos parados identificados e tratados antes de impactar cliente'},
+    /* COMBO 3.2 — EQUIPE */
+    {id:'sg30', critico:true,  combo:'3.2', comboTitulo:'👥 Equipe',
+     texto:'Nenhum colaborador sem função ou direção'},
+    {id:'sg31', critico:false, combo:'3.2', comboTitulo:'👥 Equipe',
+     texto:'Padrão operacional seguido — nenhuma execução fora do padrão'},
+    {id:'sg32', critico:false, combo:'3.2', comboTitulo:'👥 Equipe',
+     texto:'Nenhuma reclamação de cliente em aberto'},
+    /* COMBO 3.3 — OPERAÇÃO */
+    {id:'sg33', critico:true,  combo:'3.3', comboTitulo:'🏪 Operação',
+     texto:'Insumos críticos monitorados — reposição antecipada realizada'},
+    {id:'sg34', critico:false, combo:'3.3', comboTitulo:'🏪 Operação',
+     texto:'Postos organizados e limpeza sendo mantida'},
+    {id:'sg35', critico:true,  combo:'3.3', comboTitulo:'🏪 Operação',
+     texto:'Falhas relevantes registradas — nenhuma sem responsável'}
+  ]},
+
+  /* ══ MISSÃO 4 — Manter e organizar (13h–13h30) ══
+     4 itens · 2 combos
+     Intenção: a loja está no ritmo. Agora garante que a tarde começa com tudo em ordem.
+     Referências: Maslow (condições básicas garantidas), Norman (ambiente organizado = menos erro) ══ */
+  {id:'sg_e4',
+   titulo:'Manter e organizar',
+   intencao:'A loja está no ritmo. Garanta que a tarde começa com tudo em ordem.',
+   horario:'13h – 13h30',
+   emoji:'🔧',
+   missao:4,
+   itens:[
+    /* COMBO 4.1 — INSUMOS E POSTO */
+    {id:'sg36', critico:true,  combo:'4.1', comboTitulo:'📦 Insumos e posto',
+     texto:'Insumos para o turno da tarde deixados organizados e em quantidade'},
+    {id:'sg37', critico:false, combo:'4.1', comboTitulo:'📦 Insumos e posto',
+     texto:'Nenhum setor abandonado — tempo ocioso sendo aproveitado'},
+    /* COMBO 4.2 — CAIXA */
+    {id:'sg38', critico:true,  combo:'4.2', comboTitulo:'💰 Caixa',
+     texto:'Caixa conferido — divergência registrada se houver'},
+    {id:'sg42', critico:false, combo:'4.2', comboTitulo:'💰 Caixa',
+     texto:'Relatório de caixa feito e enviado no grupo'}
+  ]},
+
+  /* ══ MISSÃO 5 — Entregar a loja melhor (13h30+) ══
+     5 itens · 2 combos
+     Intenção: a Vitória vai chegar numa loja pronta. Isso é seu legado do turno.
+     Referências: Frankl (legado), Von Ahn (conclusão satisfatória) ══ */
+  {id:'sg_e5',
+   titulo:'Entregar a loja melhor do que encontrou',
+   intencao:'A Vitória vai chegar numa loja pronta. Isso é seu legado do turno.',
+   horario:'13h30+',
+   emoji:'🌟',
+   missao:5,
+   itens:[
+    /* COMBO 5.1 — PASSAGEM */
+    {id:'sg39', critico:true,  combo:'5.1', comboTitulo:'🔁 Passagem de turno',
+     texto:'Passagem registrada para a tarde — o que a Vitória precisa saber enviado no grupo'},
+    {id:'sg40', critico:true,  combo:'5.1', comboTitulo:'🔁 Passagem de turno',
+     texto:'Pendências identificadas e registradas — nenhuma crítica sem responsável'},
+    /* COMBO 5.2 — FECHAMENTO */
+    {id:'sg41', critico:true,  combo:'5.2', comboTitulo:'📋 Fechamento',
+     texto:'Falhas relevantes registradas com responsável definido'},
+    {id:'sg43', critico:false, combo:'5.2', comboTitulo:'📋 Fechamento',
+     texto:'Loja organizada para continuidade — operação em condição de continuidade'},
+    {id:'sg44', critico:true,  combo:'5.2', comboTitulo:'📋 Fechamento',
+     texto:'Problemas encaminhados — nenhum crítico em aberto sem tratamento'}
   ]}
 ];
+
+
 
 /* id do item de recheio especial */
 var SUBGER_RECHEIO_ID='sg26';
 
-/* ── Chips de justificativa (spec bloco 9) ── */
-var SUBGER_CHIPS_ACONTECEU=['Não houve tempo','Falta de insumo','Falta de funcionário','Atraso da equipe','Sistema indisponível','Equipamento com falha','Dependência externa','Problema já existia no início do turno','Improviso da operação','Falha de processo','Não verifiquei a dispensa','Peguei recheio sem conferir validade','Organização incorreta na dispensa','Outro'];
-var SUBGER_CHIPS_FEITO=['Resolvi na hora','Corrigi parcialmente','Reorganizei a dispensa','Orientei equipe','Passei para alguém','Ficou pendente','Registrei ocorrência','Acionei suporte','Acionei gerência','Acionei direção'];
+/* ── Chips contextuais por missão — Gabriela (mesmo padrão da Vitória) ── */
+var SUBGER_CHIPS_ACONTECEU_M1=['Insumo em falta','Equipamento com problema','Sistema indisponível','Equipe incompleta','Problema vindo do turno anterior','Fornecedor não entregou','Não verifiquei a dispensa','Peguei recheio sem conferir validade','Organização incorreta na dispensa','Outro'];
+var SUBGER_CHIPS_ACONTECEU_M2=['Pedido atrasado','Insumo acabou durante a operação','Equipamento parou','Colaborador saiu do posto','Cliente reclamou','Briga ou conflito na equipe','Abandono de turno','Perda de insumo','Problema de infraestrutura','Outro'];
+var SUBGER_CHIPS_ACONTECEU_M3=['Item não foi feito','Equipe saiu sem registrar','Insumo não guardado','Informação não passada','Limpeza incompleta','Outro'];
+
+var SUBGER_CHIPS_FEITO_M1=[
+  'Reabasteci na hora',
+  'Acionei produção',
+  'Reorganizei a dispensa',
+  'Orientei equipe',
+  'Registrei e monitoro',
+  'Acionei gerência',
+  'Ficou pendente para a próxima etapa'
+];
+var SUBGER_CHIPS_FEITO_M2=[
+  'Reposicionei equipe',
+  'Acionei reforço',
+  'Parei e resolvi na hora',
+  'Comuniquei ao cliente',
+  'Registrei e monitorei',
+  'Acionei gerência',
+  'Ficou pendente — anotado'
+];
+var SUBGER_CHIPS_FEITO_M3=[
+  'Fiz na hora antes de sair',
+  'Delegei para alguém da equipe',
+  'Registrei e deixei anotado para a tarde',
+  'Acionei gerência',
+  'Não foi possível resolver — registrado'
+];
+
 var SUBGER_CHIPS_PROX=['Sim, fica pendente','Não, encerrado'];
 
 function validateSubgerNeg(neg){
@@ -3658,40 +3979,143 @@ function validateSubgerNeg(neg){
 }
 
 function SubgerNaoForm(props){
-  var data=props.data||{};var showErr=props.showErr;var itemId=props.itemId||'';
+  /* ══ Form progressivo — mesmo padrão da Vitória (Gawande, Kahneman, Fogg) ══ */
+  var data=props.data||{};
+  var showErr=props.showErr;
+  var missao=props.missao||1;
+  var critico=props.critico||false;
+  var textoItem=props.textoItem||'';
+  var itemId=props.itemId||'';
   var isRecheio=itemId===SUBGER_RECHEIO_ID;
-  function set(k,v){props.onChange(function(prev){return Object.assign({},prev||{},{[k]:v});});}
+  var _etapa=useState('aconteceu');var etapa=_etapa[0];var setEtapa=_etapa[1];
+
+  function set(k,v){
+    props.onChange(function(prev){return Object.assign({},prev||{},{[k]:v});});
+  }
   function stop(e){e.stopPropagation();}
+  function avancar(proxEtapa){setEtapa(proxEtapa);}
+
+  /* Chips contextuais por missão */
+  var chipsAconteceu=missao===2?SUBGER_CHIPS_ACONTECEU_M2:(missao>=3?SUBGER_CHIPS_ACONTECEU_M3:SUBGER_CHIPS_ACONTECEU_M1);
+  var chipsFeito=missao===2?SUBGER_CHIPS_FEITO_M2:(missao>=3?SUBGER_CHIPS_FEITO_M3:SUBGER_CHIPS_FEITO_M1);
+
+  /* Desfecho — 3 opções reais da operação */
+  var opcoesDesfecho=[
+    {v:'resolvi',label:'✅ Resolvi agora',cor:'var(--ok)',desc:'Problema encerrado neste turno'},
+    {v:'Sim, fica pendente',label:'⚠️ Fica para a tarde',cor:'var(--brand)',desc:'A Vitória vai precisar saber'},
+    {v:'registrei',label:'📋 Registrei sem resolução',cor:'var(--ink2)',desc:'Não foi possível resolver agora'}
+  ];
+
+  var precisaResponsavel=critico&&data.prox!=='resolvi';
+  var etapas=['aconteceu','feito','desfecho'];
+  if(precisaResponsavel)etapas.push('responsavel');
+  etapas.push('aprendizado');
+  var idxAtual=etapas.indexOf(etapa);
+  var total=etapas.length;
+
+  var bgForm=critico?'#FFF0F0':'#FFF5F5';
+  var borderForm=critico?'2px solid var(--danger)':'1.5px solid var(--danger-line)';
+  var corTitulo=critico?'var(--danger)':'var(--ink2)';
+
+  function chipStyle(sel,cor){
+    return{padding:'9px 14px',borderRadius:'var(--r99)',border:'1.5px solid',fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:700,cursor:'pointer',transition:'all .13s',whiteSpace:'nowrap',borderColor:sel?(cor||'var(--brand)'):'var(--line)',background:sel?(cor||'var(--brand)'):'var(--surface)',color:sel?'#fff':'var(--ink2)'};
+  }
+
   return(
-    <div onClick={stop} style={{background:'#FFF5F5',border:'1.5px solid var(--danger-line)',borderRadius:'var(--r12)',padding:'14px',marginTop:10}}>
-      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:isRecheio?8:14}}>
-        <span style={{fontSize:16}}>🔴</span>
-        <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'var(--danger)',textTransform:'uppercase',letterSpacing:.5}}>Não realizado — registre o motivo</div>
+    <div onClick={stop} style={{background:bgForm,border:borderForm,borderRadius:'var(--r12)',padding:'14px',marginTop:10}}>
+
+      {/* Cabeçalho com contexto */}
+      <div style={{marginBottom:12}}>
+        <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}>
+          <span style={{fontSize:14}}>{critico?'🚨':'📝'}</span>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:10,fontWeight:800,color:corTitulo,textTransform:'uppercase',letterSpacing:.5}}>
+            {critico?'Item crítico — registre agora':'Vamos registrar para não perder.'}
+          </div>
+        </div>
+        {isRecheio&&(
+          <div style={{background:'#FEF3C7',border:'1px solid #FDE68A',borderRadius:'var(--r8)',padding:'8px 10px',marginBottom:8,fontSize:12,color:'#92400E',fontWeight:600,lineHeight:1.5}}>
+            ⚠️ Verificação de recheio não realizada corretamente no início do turno.
+          </div>
+        )}
+        {textoItem&&(
+          <div style={{background:'rgba(0,0,0,.05)',borderRadius:'var(--r8)',padding:'7px 10px',fontSize:12,color:'var(--ink)',fontWeight:600,lineHeight:1.4}}>{textoItem}</div>
+        )}
       </div>
-      {isRecheio&&(
-        <div style={{background:'#FEF3C7',border:'1px solid #FDE68A',borderRadius:'var(--r8)',padding:'10px 12px',marginBottom:12,fontSize:12,color:'#92400E',fontWeight:600,lineHeight:1.5}}>
-          ⚠️ Se houve erro de uso de recheio, a verificação não foi realizada corretamente no início do turno.
+
+      {/* Barra de progresso */}
+      <div style={{display:'flex',gap:4,marginBottom:14}}>
+        {etapas.map(function(e,i){var done=i<idxAtual;var active=i===idxAtual;return(<div key={e} style={{flex:1,height:4,borderRadius:2,background:done?'var(--ok)':active?(critico?'var(--danger)':'var(--brand)'):'var(--line)',transition:'background .2s'}}/>);})}
+      </div>
+
+      {/* Respostas já dadas — editáveis */}
+      {data.aconteceu&&etapa!=='aconteceu'&&(
+        <div style={{marginBottom:8,display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'var(--surface)',borderRadius:'var(--r8)',border:'1px solid var(--line)',cursor:'pointer'}} onClick={function(e){e.stopPropagation();setEtapa('aconteceu');}}>
+          <span style={{fontSize:11,color:'var(--ink3)',flex:1}}>O que aconteceu: <strong style={{color:'var(--ink)'}}>{data.aconteceu}</strong></span>
+          <span style={{fontSize:10,color:'var(--brand)',fontWeight:700}}>editar</span>
         </div>
       )}
-      <div style={{marginBottom:12}}>
-        <div style={{fontSize:11,fontWeight:700,color:'var(--ink2)',marginBottom:7,textTransform:'uppercase',letterSpacing:.4}}>1. O que aconteceu?{showErr&&!data.aconteceu&&<span style={{color:'var(--danger)'}}> *</span>}</div>
-        <div className="chip-row">{SUBGER_CHIPS_ACONTECEU.map(function(c){var sel=data.aconteceu===c;return(<button key={c} onClick={function(e){e.stopPropagation();set('aconteceu',c);}} className={'chip'+(sel?' sc':'')}>{c}</button>);})}</div>
-        {showErr&&!data.aconteceu&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Selecione o motivo</div>}
-      </div>
-      <div style={{marginBottom:12}}>
-        <div style={{fontSize:11,fontWeight:700,color:'var(--ink2)',marginBottom:7,textTransform:'uppercase',letterSpacing:.4}}>2. O que foi feito?{showErr&&!data.feito&&<span style={{color:'var(--danger)'}}> *</span>}</div>
-        <div className="chip-row">{SUBGER_CHIPS_FEITO.map(function(c){var sel=data.feito===c;return(<button key={c} onClick={function(e){e.stopPropagation();set('feito',c);}} className={'chip'+(sel?' sc':'')}>{c}</button>);})}</div>
-        {showErr&&!data.feito&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Selecione a ação</div>}
-      </div>
-      <div style={{marginBottom:12}}>
-        <div style={{fontSize:11,fontWeight:700,color:'var(--ink2)',marginBottom:7,textTransform:'uppercase',letterSpacing:.4}}>3. Fica para o próximo turno?{showErr&&!data.prox&&<span style={{color:'var(--danger)'}}> *</span>}</div>
-        <div style={{display:'flex',gap:8}}>{SUBGER_CHIPS_PROX.map(function(c){var sel=data.prox===c;return(<button key={c} onClick={function(e){e.stopPropagation();set('prox',c);}} style={{flex:1,padding:'10px 6px',borderRadius:'var(--r8)',border:'1.5px solid',fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:700,cursor:'pointer',textAlign:'center',transition:'all .13s',borderColor:sel?(c==='Sim, fica pendente'?'var(--brand)':'var(--ok)'):'var(--line)',background:sel?(c==='Sim, fica pendente'?'var(--brand)':'var(--ok)'):'var(--surface)',color:sel?'#fff':'var(--ink2)'}}>{c==='Sim, fica pendente'?'⚠️ '+c:'✅ '+c}</button>);})}</div>
-        {showErr&&!data.prox&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Obrigatório</div>}
-      </div>
-      <div>
-        <div style={{fontSize:11,fontWeight:700,color:'var(--ink2)',marginBottom:5,textTransform:'uppercase',letterSpacing:.4}}>4. Detalhe adicional <span style={{color:'var(--ink3)',fontWeight:400,textTransform:'none'}}>(opcional)</span></div>
-        <textarea className="neg-obs" value={data.detalhe||''} onClick={function(e){e.stopPropagation();}} onChange={function(e){e.stopPropagation();set('detalhe',e.target.value.slice(0,280));}} placeholder="Complemento rápido..." style={{minHeight:52,width:'100%'}}/>
-      </div>
+      {data.feito&&etapa!=='aconteceu'&&etapa!=='feito'&&(
+        <div style={{marginBottom:8,display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'var(--surface)',borderRadius:'var(--r8)',border:'1px solid var(--line)',cursor:'pointer'}} onClick={function(e){e.stopPropagation();setEtapa('feito');}}>
+          <span style={{fontSize:11,color:'var(--ink3)',flex:1}}>O que foi feito: <strong style={{color:'var(--ink)'}}>{data.feito}</strong></span>
+          <span style={{fontSize:10,color:'var(--brand)',fontWeight:700}}>editar</span>
+        </div>
+      )}
+
+      {/* Etapa 1: O que aconteceu */}
+      {etapa==='aconteceu'&&(
+        <div>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:'var(--ink)',marginBottom:10}}>O que aconteceu?</div>
+          <div className="chip-row">{chipsAconteceu.map(function(c){var sel=data.aconteceu===c;return(<button key={c} onClick={function(e){e.stopPropagation();set('aconteceu',c);avancar('feito');}} style={chipStyle(sel,'var(--brand)')}>{c}</button>);})}</div>
+          <textarea className="neg-obs" value={data.aconteceu&&!chipsAconteceu.includes(data.aconteceu)?data.aconteceu:''} onClick={function(e){e.stopPropagation();}} onChange={function(e){e.stopPropagation();set('aconteceu',e.target.value);}} placeholder="Ou descreva aqui..." style={{minHeight:44,width:'100%',marginTop:8}}/>
+          {data.aconteceu&&<button onClick={function(e){e.stopPropagation();avancar('feito');}} style={{width:'100%',marginTop:8,padding:'10px',background:'var(--brand)',color:'#fff',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,border:'none',cursor:'pointer'}}>Continuar →</button>}
+          {showErr&&!data.aconteceu&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Selecione o motivo</div>}
+        </div>
+      )}
+
+      {/* Etapa 2: O que foi feito */}
+      {etapa==='feito'&&(
+        <div>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:'var(--ink)',marginBottom:10}}>O que você fez?</div>
+          <div className="chip-row">{chipsFeito.map(function(c){var sel=data.feito===c;return(<button key={c} onClick={function(e){e.stopPropagation();set('feito',c);avancar('desfecho');}} style={chipStyle(sel,'var(--brand)')}>{c}</button>);})}</div>
+          {data.feito&&<button onClick={function(e){e.stopPropagation();avancar('desfecho');}} style={{width:'100%',marginTop:8,padding:'10px',background:'var(--brand)',color:'#fff',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,border:'none',cursor:'pointer'}}>Continuar →</button>}
+          {showErr&&!data.feito&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Selecione a ação</div>}
+        </div>
+      )}
+
+      {/* Etapa 3: Desfecho */}
+      {etapa==='desfecho'&&(
+        <div>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:'var(--ink)',marginBottom:10}}>Como ficou?</div>
+          <div style={{display:'flex',flexDirection:'column',gap:8}}>
+            {opcoesDesfecho.map(function(op){var sel=data.prox===op.v;return(
+              <button key={op.v} onClick={function(e){e.stopPropagation();set('prox',op.v);if(!precisaResponsavel){avancar('aprendizado');}else{avancar('responsavel');}}} style={{width:'100%',padding:'12px 14px',borderRadius:'var(--r8)',border:'1.5px solid',textAlign:'left',cursor:'pointer',borderColor:sel?op.cor:'var(--line)',background:sel?op.cor:'var(--surface)',color:sel?'#fff':'var(--ink)',transition:'all .13s'}}>
+                <div style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700}}>{op.label}</div>
+                <div style={{fontSize:11,opacity:.75,marginTop:2}}>{op.desc}</div>
+              </button>
+            );})}
+          </div>
+          {showErr&&!data.prox&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Obrigatório</div>}
+        </div>
+      )}
+
+      {/* Etapa 4: Responsável (só crítico não resolvido) */}
+      {etapa==='responsavel'&&(
+        <div>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:'var(--ink)',marginBottom:10}}>Quem ficou responsável?</div>
+          <div className="chip-row">{['Vitória','Derik','Camila','Bruna','Eu mesmo'].map(function(r){var sel=data.responsavel===r;return(<button key={r} onClick={function(e){e.stopPropagation();set('responsavel',r);avancar('aprendizado');}} style={chipStyle(sel,'var(--brand)')}>{r}</button>);})}</div>
+          {showErr&&!data.responsavel&&<div style={{fontSize:10,color:'var(--danger)',marginTop:4,fontWeight:600}}>⚠ Obrigatório para item crítico</div>}
+        </div>
+      )}
+
+      {/* Etapa 5: Aprendizado */}
+      {etapa==='aprendizado'&&(
+        <div>
+          <div style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:'var(--ok)',marginBottom:6}}>✅ Registrado!</div>
+          <div style={{fontSize:12,color:'var(--ink2)',marginBottom:10,lineHeight:1.5}}>Quer adicionar um detalhe? <span style={{color:'var(--ink3)'}}>(opcional)</span></div>
+          <textarea className="neg-obs" value={data.detalhe||''} onClick={function(e){e.stopPropagation();}} onChange={function(e){e.stopPropagation();set('detalhe',e.target.value.slice(0,280));}} placeholder="Complemento rápido..." style={{minHeight:52,width:'100%'}}/>
+          <button onClick={function(e){e.stopPropagation();}} style={{width:'100%',marginTop:8,padding:'10px',background:'var(--ok)',color:'#fff',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,border:'none',cursor:'pointer'}}>✓ Concluir registro</button>
+        </div>
+      )}
     </div>
   );
 }
@@ -3735,7 +4159,7 @@ function SubgerBlocoItem(props){
       {!resp&&showErr&&<div className="req-msg">⚠ Obrigatório</div>}
       {resp==='nao'&&(
         <div>
-          <SubgerNaoForm data={neg} itemId={item.id} onChange={function(d){onNeg(item.id,d);}} showErr={showErr}/>
+          <SubgerNaoForm data={neg} itemId={item.id} missao={item.missao||1} critico={item.critico||false} textoItem={item.texto||''} onChange={function(d){onNeg(item.id,d);}} showErr={showErr}/>
           {validateSubgerNeg(neg)&&(
             <button onClick={function(){setOpen(false);}} style={{width:'100%',marginTop:10,padding:'11px',background:'var(--ok)',color:'#fff',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,border:'none',cursor:'pointer'}}>
               ✓ Confirmar e recolher
@@ -3886,8 +4310,8 @@ function SubgerSummaryScreen(props){
           {[{icon:'📋',val:total,lbl:'Total itens'},{icon:'✅',val:total-falhas,lbl:'OK'},{icon:'❌',val:falhas,lbl:'Falhas'},{icon:'⏳',val:pendencias,lbl:'Pendências'}].map(function(x){return(<div key={x.lbl} style={{background:'#fff',borderRadius:12,padding:'12px 8px',textAlign:'center',border:'1px solid #E5E7EB'}}><div style={{fontSize:18}}>{x.icon}</div><div style={{fontFamily:"'Sora',sans-serif",fontSize:22,fontWeight:900,color:'#111'}}>{x.val}</div><div style={{fontSize:10,color:'#9CA3AF',fontWeight:600,marginTop:2}}>{x.lbl}</div></div>);})}
         </div>
         <div style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'14px',marginBottom:12}}>
-          <div style={{fontSize:11,fontWeight:700,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:.5,marginBottom:10}}>Resumo por etapa</div>
-          {SUBGER_ETAPAS.map(function(e){var fl2=e.itens.filter(function(i){return resps[i.id]==='nao';}).length;var ok=e.itens.every(function(i){return resps[i.id];});return(<div key={e.id} style={{display:'flex',alignItems:'center',gap:10,padding:'7px 0',borderBottom:'1px solid #F3F4F6'}}><span>{ok?'✅':fl2>0?'❌':'⏳'}</span><div style={{flex:1,fontSize:13,fontWeight:600}}>{e.titulo}</div><span style={{fontSize:11,fontWeight:700,color:fl2>0?'var(--danger)':'var(--ok)'}}>{fl2>0?fl2+' falha'+(fl2>1?'s':''):'OK'}</span></div>);})}
+          <div style={{fontSize:11,fontWeight:700,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:.5,marginBottom:10}}>Resumo por missão</div>
+          {SUBGER_ETAPAS.map(function(e){var fl2=e.itens.filter(function(i){return resps[i.id]==='nao';}).length;var ok=e.itens.every(function(i){return resps[i.id];});return(<div key={e.id} style={{display:'flex',alignItems:'center',gap:10,padding:'7px 0',borderBottom:'1px solid #F3F4F6'}}><span style={{fontSize:14}}>{e.emoji||'✅'}</span><div style={{flex:1}}><div style={{fontSize:13,fontWeight:600}}>{e.titulo}</div><div style={{fontSize:10,color:'#9CA3AF'}}>{e.horario}</div></div><span style={{fontSize:11,fontWeight:700,color:fl2>0?'var(--danger)':'var(--ok)'}}>{fl2>0?fl2+' falha'+(fl2>1?'s':''):'OK'}</span></div>);})}
         </div>
         {falhasItems.length>0&&(
           <div style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'14px',marginBottom:12}}>
@@ -4430,16 +4854,19 @@ function SubgerChecklistScreen(props){
   useEffect(function(){
     try{
       var s=JSON.parse(localStorage.getItem(SAVE_KEY));
-      if(s&&s.resps&&Object.keys(s.resps).length>0){
+      /* REGRA: só restaura rascunho se for do dia atual — evita pré-preenchimento de dia anterior */
+      if(s&&s.resps&&Object.keys(s.resps).length>0&&s.data===todayISO()){
         setResps(s.resps||{});setNegs(s.negs||{});setHoraInicio(s.horaInicio||null);
         if(s.sugestao)setSugestao(s.sugestao);
+      }else if(s){
+        try{localStorage.removeItem(SAVE_KEY);}catch(e){}
       }
     }catch(e){}
   },[]);
 
   useEffect(function(){
     if(screen==='checklist'){
-      try{localStorage.setItem(SAVE_KEY,JSON.stringify({resps:resps,negs:negs,horaInicio:horaInicio,sugestao:sugestao}));}catch(e){}
+      try{localStorage.setItem(SAVE_KEY,JSON.stringify({resps:resps,negs:negs,horaInicio:horaInicio,sugestao:sugestao,data:todayISO()}));}catch(e){}
     }
   },[resps,negs,screen,horaInicio,sugestao]);
 
@@ -4469,17 +4896,41 @@ function SubgerChecklistScreen(props){
     return errs;
   }
 
+  /* Horário mínimo por missão — aviso suave, não bloqueio */
+  var HORARIO_MINIMO_SUBGER=[0,8,9,11,13]; /* índice = missão-1 — 5 missões */
+  var _avisoHorario=useState(false);var avisoHorario=_avisoHorario[0];var setAvisoHorario=_avisoHorario[1];
+  var _proximaEtapaSG=useState(0);var proximaEtapaSG=_proximaEtapaSG[0];var setProximaEtapaSG=_proximaEtapaSG[1];
+
   function handleAvancar(){
     var errs=validateEtapa(etapaIdx);
     if(errs.length>0){setShowErr(true);window.scrollTo({top:0,behavior:'smooth'});showToast('⚠ Preencha todos os itens');return;}
     setShowErr(false);
-    if(etapaIdx<SUBGER_ETAPAS.length-1){
-      setEtapaIdx(function(i){return i+1;});
+    var proxIdx=etapaIdx+1;
+    if(proxIdx<SUBGER_ETAPAS.length){
+      var horaAtual=new Date().getHours();
+      var horaMinima=HORARIO_MINIMO_SUBGER[proxIdx];
+      if(horaAtual<horaMinima){
+        setProximaEtapaSG(proxIdx);
+        setAvisoHorario(true);
+        window.scrollTo({top:0,behavior:'smooth'});
+        return;
+      }
+      setEtapaIdx(proxIdx);
       window.scrollTo({top:0,behavior:'smooth'});
     }else{
       setScreen('ocorrencias');
       window.scrollTo({top:0,behavior:'smooth'});
     }
+  }
+
+  function handleAvancarConfirmadoSG(){
+    setAvisoHorario(false);
+    if(proximaEtapaSG<SUBGER_ETAPAS.length){
+      setEtapaIdx(proximaEtapaSG);
+    }else{
+      setScreen('ocorrencias');
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 
   function handleVoltar(){
@@ -4499,10 +4950,10 @@ function SubgerChecklistScreen(props){
     var ok=await sbInsert('subger_checklists',{login:user.login,user_name:user.name,turno:'manha',data:todayISO(),data_fmt:todayFmt(),hora:nowTime(),hora_inicio:horaInicio,score:score,total:totalItems,falhas:falhas,criticos:criticos,pendencias:pendencias,status:statusKey,etapas_concluidas:etapasConcluidas,resps:resps,negs:negs,relato:relato||'',sugestao:(sugestao&&sugestao.atividade?sugestao:{})});
     if(!ok){setSending(false);showToast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.');return;}
     await salvarPendencias(allItems,negs,resps,user,'manha','subger_checklists');
-    await sendWebhookComAviso(SISTEMA+' — SUBGERÊNCIA MANHÃ\n'+user.name+' · '+todayFmt()+'\nStatus: '+statusKey.toUpperCase()+' · Score: '+score+'/100',{assunto:'[CheckON Subgerência] '+statusKey.toUpperCase()+' – '+user.name},showToast);
+
     try{localStorage.removeItem(SAVE_KEY);}catch(e){}
     setEnvScore(score);setEnviado(true);
-    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},2200);
+    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},900);
   }
 
   function handleLimpar(){
@@ -4558,9 +5009,31 @@ function SubgerChecklistScreen(props){
   var rascunhoSalvo=(function(){try{var s=JSON.parse(localStorage.getItem(SAVE_KEY));return s&&s.resps&&Object.keys(s.resps).length>0?s:null;}catch(e){return null;}})();
 
   if(screen==='inicio'){
-    /* Auto-avança para o checklist com a hora de início definida */
+    /* Retoma por missão do horário atual — igual ao padrão da Vitória */
     if(!horaInicio)setHoraInicio(nowTime());
-    setEtapaIdx(0);setShowErr(false);setScreen('checklist');
+    setShowErr(false);
+    var temResps=resps&&Object.keys(resps).length>0;
+    if(temResps){
+      /* Tem rascunho — encontra a primeira missão incompleta */
+      var idxRetomar=0;
+      for(var mi=0;mi<SUBGER_ETAPAS.length;mi++){
+        var etapaCheck=SUBGER_ETAPAS[mi];
+        var completa=etapaCheck.itens.every(function(it){return resps[it.id];});
+        if(!completa){idxRetomar=mi;break;}
+        if(mi===SUBGER_ETAPAS.length-1)idxRetomar=mi;
+      }
+      setEtapaIdx(idxRetomar);
+    }else{
+      /* Turno novo — abre pela missão do horário atual */
+      var horaAtualI=new Date().getHours();
+      var idxHorario=0;
+      if(horaAtualI>=13)idxHorario=4;
+      else if(horaAtualI>=11)idxHorario=2;
+      else if(horaAtualI>=9)idxHorario=1;
+      else idxHorario=0;
+      setEtapaIdx(idxHorario);
+    }
+    setScreen('checklist');
     return null;
   }
 
@@ -4571,6 +5044,36 @@ function SubgerChecklistScreen(props){
       <EnviadoPopup show={enviado} user={user} score={envScore} label='Subgerência Manhã'/>
       {sending&&!enviado&&<div className="overlay"><div className="overlay-card"><div className="spin"/><div style={{fontFamily:"'Sora',sans-serif",fontSize:14,fontWeight:800}}>Salvando...</div></div></div>}
       <Toast msg={toast.msg} show={toast.show}/>
+
+      {/* ── MODAL AVISO DE HORÁRIO — informa, não bloqueia ── */}
+      {avisoHorario&&(function(){
+        var proxEtapa=SUBGER_ETAPAS[proximaEtapaSG];
+        var horaMinima=HORARIO_MINIMO_SUBGER[proximaEtapaSG];
+        return(
+          <div className="overlay" onClick={function(){setAvisoHorario(false);}}>
+            <div className="overlay-card" onClick={function(e){e.stopPropagation();}} style={{maxWidth:320,textAlign:'left',padding:'24px'}}>
+              <div style={{fontSize:22,marginBottom:10,textAlign:'center'}}>⏰</div>
+              <div style={{fontFamily:"'Sora',sans-serif",fontSize:15,fontWeight:900,color:'var(--ink)',marginBottom:8,textAlign:'center'}}>Hora certa pra isso?</div>
+              <div style={{fontSize:13,color:'var(--ink2)',lineHeight:1.6,marginBottom:16,textAlign:'center'}}>
+                A próxima missão <strong>{proxEtapa.emoji} {proxEtapa.titulo}</strong> é prevista para as <strong>{horaMinima}h</strong>.<br/>
+                Agora são <strong>{new Date().getHours()}h</strong>.
+              </div>
+              <div style={{fontSize:12,color:'var(--ink3)',background:'var(--surface2)',borderRadius:'var(--r8)',padding:'10px 12px',marginBottom:16,lineHeight:1.5}}>
+                Se você está adiantada, pode continuar. Se preferir, volte quando o horário chegar.
+              </div>
+              <div style={{display:'flex',flexDirection:'column',gap:8}}>
+                <button onClick={handleAvancarConfirmadoSG} style={{width:'100%',padding:'12px',background:'var(--brand)',color:'#fff',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:800,border:'none',cursor:'pointer'}}>
+                  Continuar mesmo assim →
+                </button>
+                <button onClick={function(){setAvisoHorario(false);}} style={{width:'100%',padding:'10px',background:'transparent',color:'var(--ink3)',borderRadius:'var(--r8)',fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:600,border:'1px solid var(--line)',cursor:'pointer'}}>
+                  Voltar e esperar
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {subgerHdr}
       <div className="prog-card">
         <div className="prog-top"><div className="prog-lbl">Progresso geral</div><div className="prog-pct">{pct}%</div></div>
@@ -4579,18 +5082,28 @@ function SubgerChecklistScreen(props){
           <div><div className="pv" style={{color:'var(--ok)'}}>{respondidos}</div><div className="pl">Resp.</div></div>
           <div><div className="pv" style={{color:'var(--ink3)'}}>{totalItems-respondidos}</div><div className="pl">Pend.</div></div>
           <div><div className="pv" style={{color:'var(--brand)'}}>{falhasTotal}</div><div className="pl">Falhas</div></div>
-          <div><div className="pv" style={{color:'var(--brand)'}}>{SUBGER_ETAPAS.length}</div><div className="pl">Etapas</div></div>
+          <div><div className="pv" style={{color:'var(--brand)'}}>{SUBGER_ETAPAS.length}</div><div className="pl">Missões</div></div>
         </div>
       </div>
       <div style={{margin:'10px 16px 0',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:'var(--surface)',borderRadius:'var(--r12)',border:'1px solid var(--line)'}}>
         <div>
-          <div style={{fontSize:12,color:'var(--ink3)',fontWeight:600}}>Etapa {etapaIdx+1} de {SUBGER_ETAPAS.length}</div>
+          <div style={{fontSize:12,color:'var(--ink3)',fontWeight:600}}>Missão {etapaIdx+1} de {SUBGER_ETAPAS.length}</div>
           {etapaAtual.horario&&<div style={{fontSize:11,color:'var(--brand)',fontWeight:700,marginTop:1}}>🕐 {etapaAtual.horario}</div>}
         </div>
         <div style={{display:'flex',gap:4}}>
           {SUBGER_ETAPAS.map(function(e,i){var done=e.itens.every(function(it){return resps[it.id];});return(<div key={e.id} style={{width:28,height:6,borderRadius:3,background:i===etapaIdx?'var(--brand)':done?'var(--ok)':'var(--line)',transition:'background .2s'}}/>);})}
         </div>
       </div>
+      {/* Card de intenção da missão — aparece ao entrar na missão */}
+      {etapaAtual.intencao&&(
+        <div style={{margin:'8px 16px 0',background:'var(--brand)',borderRadius:'var(--r12)',padding:'14px 16px',display:'flex',alignItems:'center',gap:12}}>
+          <div style={{fontSize:28,flexShrink:0}}>{etapaAtual.emoji}</div>
+          <div>
+            <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'rgba(255,255,255,.7)',textTransform:'uppercase',letterSpacing:1,marginBottom:3}}>Missão {etapaAtual.missao} · {etapaAtual.horario}</div>
+            <div style={{fontSize:13,color:'#fff',lineHeight:1.5,fontWeight:600}}>{etapaAtual.intencao}</div>
+          </div>
+        </div>
+      )}
       <SubgerEtapaAcc etapa={etapaAtual} resps={resps} negs={negs} onAns={onAns} onNeg={onNeg} showErr={showErr}/>
       <SugestaoForm data={sugestao} onChange={setSugestao} aberto={sugestaoAberta} onAbrir={function(){setSugestaoAberta(true);}} onFechar={function(){setSugestaoAberta(false);}} cor="var(--brand)"/>
       {(function(){
@@ -4603,7 +5116,7 @@ function SubgerChecklistScreen(props){
               {etapaIdx===0&&<button onClick={function(){if(onBack)onBack();else handleVoltar();}} style={{flexShrink:0,padding:'10px 13px',borderRadius:'var(--r8)',background:'var(--surface2)',border:'1.5px solid var(--line)',fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:700,color:'var(--ink2)',cursor:'pointer',whiteSpace:'nowrap'}}>← Início</button>}
               <button className="fab-send" onClick={handleAvancar} disabled={sending} style={{opacity:etapaOk?1:.45,background:etapaOk?'var(--brand)':'var(--ink3)',boxShadow:etapaOk?'var(--sh-brand)':'none',transition:'all .2s'}}>
                 {etapaOk
-                  ?(etapaIdx<SUBGER_ETAPAS.length-1?'Próxima etapa →':'Finalizar turno 🚀')
+                  ?(etapaIdx<SUBGER_ETAPAS.length-1?'Próxima missão →':'Finalizar turno 🚀')
                   :(pendentesEtapa+' item'+(pendentesEtapa>1?'s':'')+' pendente'+(pendentesEtapa>1?'s':''))}
               </button>
               <button onClick={function(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({resps:resps,negs:negs,horaInicio:horaInicio,data:todayISO()}));}catch(e){}showToast('📝 Rascunho salvo.');setTimeout(function(){if(onBack)onBack();},700);}} style={{flexShrink:0,padding:'10px 13px',borderRadius:'var(--r8)',background:'var(--surface2)',border:'1.5px solid var(--line)',fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:700,color:'var(--ink2)',cursor:'pointer',whiteSpace:'nowrap'}}>⏸ Depois</button>
@@ -5386,6 +5899,10 @@ function NoiteSummaryScreen(props){
           <button onClick={function(){setConfirmando(true);}} style={{flex:2,padding:13,background:'#25D366',color:'#fff',borderRadius:12,fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,cursor:'pointer',border:'none'}}>📲 Enviar para o grupo</button>
           <button onClick={handleCopy} style={{flex:1,padding:13,background:'#F3F4F6',color:'#374151',borderRadius:12,fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:700,cursor:'pointer',border:'1px solid #E5E7EB'}}>📋 Copiar</button>
         </div>
+        {/* Botão encerrar turno — disponível direto no summary, sem precisar passar pelo WhatsApp */}
+        <button onClick={function(){setEncerrado(true);}} style={{width:'100%',padding:14,background:'#EA1D2C',color:'#fff',borderRadius:12,fontFamily:"'Sora',sans-serif",fontSize:15,fontWeight:800,cursor:'pointer',border:'none',marginBottom:8}}>
+          ✓ Terminei meu turno
+        </button>
         <button onClick={onNovo} style={{width:'100%',padding:11,background:'transparent',color:'#9CA3AF',borderRadius:12,fontSize:12,fontWeight:600,cursor:'pointer',border:'1px solid #E5E7EB'}}>← Voltar ao início</button>
       </div>
     </div>
@@ -5490,10 +6007,10 @@ function NoiteChecklistScreen(props){
     var ok=await sbInsert('subger_noite_checklists',{login:user.login,user_name:user.name,turno:'noite',data:todayISO(),data_fmt:todayFmt(),hora:nowTime(),hora_inicio:horaInicio,score:score,total:totalItems,falhas:falhas,criticos:criticos,pendencias:pendencias,status:statusKey,etapas_concluidas:etapasConcluidas,resps:resps,negs:negs,relato:relato||'',sugestao:(sugestao&&sugestao.atividade?sugestao:{})});
     if(!ok){setSending(false);showToast('❌ Erro ao salvar. Verifique sua conexão e tente novamente.');return;}
     await salvarPendencias(allItems,negs,resps,user,'noite','subger_noite_checklists');
-    await sendWebhookComAviso(SISTEMA+' — SUBGERÊNCIA NOITE\n'+user.name+' · '+todayFmt()+'\nStatus: '+statusKey.toUpperCase()+' · Score: '+score+'/100',{assunto:'[CheckON Noite] '+statusKey.toUpperCase()+' – '+user.name},showToast);
+
     try{localStorage.removeItem(SAVE_KEY);}catch(e){} try{localStorage.removeItem('checkon_ctx_'+user.login);}catch(e){} try{localStorage.setItem('checkon_last_score_'+user.login,JSON.stringify({score:score,data:todayISO()}));}catch(e){}
     setEnvScore(score);setEnviado(true);
-    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},2200);
+    setTimeout(function(){setSending(false);setEnviado(false);setScreen('summary');},900);
   }
   function handleLimpar(){if(!window.confirm('Limpar checklist atual?'))return;try{localStorage.removeItem(SAVE_KEY);}catch(e){}setResps({});setNegs({});setShowErr(false);setEtapaIdx(0);setHoraInicio(null);setSugestao({});setSugestaoAberta(false);if(onBack)onBack();}
   var noiteHdr=(
@@ -5925,7 +6442,7 @@ function SubgerenteHub(props){
     }catch(e){return null;}
   })();
 
-  var etapasPreview=SUBGER_ETAPAS.map(function(e){return{titulo:e.titulo,horario:e.horario||''};});
+  var etapasPreview=SUBGER_ETAPAS.map(function(e){return{titulo:e.titulo,horario:e.horario||'',intencao:e.intencao||''};});
   var allSubgerItems=SUBGER_ETAPAS.reduce(function(acc,e){return acc.concat(e.itens);},[]); 
 
   return(
@@ -5956,6 +6473,47 @@ function SubgerenteHub(props){
 }
 
 /* ══ FIM DOS MÓDULOS SUBGERÊNCIA ══ */
+
+function SplashScreen(props){
+  var onEnter=props.onEnter;
+  return(
+    <div className="splash-bg">
+      <div className="splash-noise"/>
+      <div className="splash-glow"/>
+      <div className="splash-glow2"/>
+      <div className="splash-inner">
+        <div className="splash-badge">
+          <div className="splash-badge-dot"/>
+          <span className="splash-badge-txt">CheckON · Pastel da Camilla</span>
+        </div>
+        <div className="splash-logo-area">
+          <div className="splash-logo-circle">🥟</div>
+          <div className="splash-logo-name">
+            <b>CheckON</b>
+            <small>Gestão de turno inteligente</small>
+          </div>
+        </div>
+        <div className="splash-headline">
+          Se seu checklist<br/>ainda é <em>na mão</em>,<br/>
+          <span className="line-dim">você tá na década errada.</span>
+        </div>
+        <div className="splash-pills">
+          <div className="splash-pill"><span>⚡</span>Tempo real</div>
+          <div className="splash-pill"><span>📊</span>Score por turno</div>
+          <div className="splash-pill"><span>🔒</span>Rastreável</div>
+          <div className="splash-pill"><span>📱</span>100% no celular</div>
+        </div>
+        <div className="splash-sub">
+          Checklists estruturados, score automático e visibilidade total da operação — sem papel, sem WhatsApp perdido.
+        </div>
+        <button className="splash-cta" onClick={onEnter}>
+          Quero conhecer o CheckON →
+        </button>
+        <div className="splash-skip" onClick={onEnter}>Já tenho acesso — fazer login</div>
+      </div>
+    </div>
+  );
+}
 
 function Login(props){
   var onLogin=props.onLogin;
