@@ -1236,7 +1236,7 @@ function openWA(){
 }
 const USERS_KEY='konclui_users';
 const SESSION_KEY='konclui_session';
-const VERSION='2026.18';
+const VERSION='2026.19';
 const PWD_2026='158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
 
 (function(){
@@ -4862,10 +4862,20 @@ function SubgerChecklistScreen(props){
   useEffect(function(){
     try{
       var s=JSON.parse(localStorage.getItem(SAVE_KEY));
-      /* REGRA: só restaura rascunho se for do dia atual — evita pré-preenchimento de dia anterior */
+      /* REGRA: só restaura se for do dia atual E IDs pertencem ao checklist atual */
       if(s&&s.resps&&Object.keys(s.resps).length>0&&s.data===todayISO()){
-        setResps(s.resps||{});setNegs(s.negs||{});setHoraInicio(s.horaInicio||null);
-        if(s.sugestao)setSugestao(s.sugestao);
+        var idsAtuais=SUBGER_ETAPAS.reduce(function(a,e){return a.concat(e.itens.map(function(i){return i.id;}));},[]); 
+        var idsRasc=Object.keys(s.resps);
+        var validos=idsRasc.filter(function(id){return idsAtuais.indexOf(id)>=0;});
+        if(validos.length>0){
+          /* Filtra só os IDs válidos — descarta IDs de versões antigas */
+          var respsValidos={};validos.forEach(function(id){respsValidos[id]=s.resps[id];});
+          var negsValidos={};validos.forEach(function(id){if(s.negs&&s.negs[id])negsValidos[id]=s.negs[id];});
+          setResps(respsValidos);setNegs(negsValidos);setHoraInicio(s.horaInicio||null);
+          if(s.sugestao)setSugestao(s.sugestao);
+        }else{
+          try{localStorage.removeItem(SAVE_KEY);}catch(e){}
+        }
       }else if(s){
         try{localStorage.removeItem(SAVE_KEY);}catch(e){}
       }
@@ -5880,16 +5890,20 @@ function NoiteChecklistScreen(props){
   useEffect(function(){
     try{
       var s=JSON.parse(localStorage.getItem(SAVE_KEY));
-      /* REGRA: só restaura rascunho se for do dia atual.
-         BUG HISTÓRICO: rascunhos antigos sem campo 'data' eram restaurados sempre,
-         causando checklist abrir pré-preenchido. Corrigido: qualquer rascunho sem
-         data válida de hoje é descartado silenciosamente.
-         INVARIANTE: todo setItem do SAVE_KEY deve incluir data:todayISO() */
+      /* REGRA: só restaura se for do dia atual E IDs pertencem ao checklist atual */
       if(s&&s.resps&&Object.keys(s.resps).length>0&&s.data===todayISO()){
-        setResps(s.resps||{});setNegs(s.negs||{});setHoraInicio(s.horaInicio||null);
-        if(s.sugestao)setSugestao(s.sugestao);
+        var idsAtuaisV=NOITE_ETAPAS.reduce(function(a,e){return a.concat(e.itens.map(function(i){return i.id;}));},[]); 
+        var idsRascV=Object.keys(s.resps);
+        var validosV=idsRascV.filter(function(id){return idsAtuaisV.indexOf(id)>=0;});
+        if(validosV.length>0){
+          var respsValidosV={};validosV.forEach(function(id){respsValidosV[id]=s.resps[id];});
+          var negsValidosV={};validosV.forEach(function(id){if(s.negs&&s.negs[id])negsValidosV[id]=s.negs[id];});
+          setResps(respsValidosV);setNegs(negsValidosV);setHoraInicio(s.horaInicio||null);
+          if(s.sugestao)setSugestao(s.sugestao);
+        }else{
+          try{localStorage.removeItem(SAVE_KEY);}catch(e){}
+        }
       }else if(s){
-        /* Qualquer rascunho sem data válida de hoje é descartado */
         try{localStorage.removeItem(SAVE_KEY);}catch(e){}
       }
     }catch(e){}
