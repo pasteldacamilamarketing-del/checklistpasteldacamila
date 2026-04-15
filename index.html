@@ -3305,139 +3305,147 @@ function CEODashboardNew(props){
 
       {/* VOZES DA EQUIPE */}
       {tab==='vozes'&&(function(){
-        /* Coleta todos relatos + negs + sugestoes + ocorrencias */
-        var itensRelato=[];
-        /* Subgerência manhã */
-        subgerData.filter(function(d){return d.relato&&d.relato.trim();}).forEach(function(d){
-          itensRelato.push({tipo:'relato',pessoa:'Gabriela',turno:'🌅 Manhã',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.relato,score:d.score,status:d.status});
-        });
-        /* Subgerência noite */
-        noiteData.filter(function(d){return d.relato&&d.relato.trim();}).forEach(function(d){
-          itensRelato.push({tipo:'relato',pessoa:'Vitória',turno:'🌙 Noite',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.relato,score:d.score,status:d.status});
-        });
-        /* DP ocorrências */
-        dpData.filter(function(d){return d.ocorrencia&&d.ocorrencia.trim();}).forEach(function(d){
-          itensRelato.push({tipo:'ocorrencia',pessoa:'Viviane',turno:'🗂️ DP',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.ocorrencia,score:d.score,status:d.status});
-        });
-        /* Sugestões */
-        var todasSugs=[];
-        subgerData.filter(function(d){return d.sugestao&&d.sugestao.atividade;}).forEach(function(d){
-          todasSugs.push({pessoa:'Gabriela',turno:'🌅 Manhã',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.sugestao.atividade});
-        });
-        noiteData.filter(function(d){return d.sugestao&&d.sugestao.atividade;}).forEach(function(d){
-          todasSugs.push({pessoa:'Vitória',turno:'🌙 Noite',data:d.data_fmt||d.data,hora:d.hora||'',texto:d.sugestao.atividade});
-        });
-        dpSugs.forEach(function(s){
-          if(s.sugestao&&s.sugestao.atividade)todasSugs.push({pessoa:'Viviane',turno:'🗂️ DP',data:s.data_fmt||s.data,hora:s.hora||'',texto:s.sugestao.atividade});
-        });
-        /* Negs detalhados — só itens com detalhe ou aconteceu relevante */
-        var todosNegs=[];
-        function extrairNegs(registros,pessoa,turnoLabel){
+        /* ═══ VOZES DA EQUIPE — Gabriela e Vitória ═══
+           Exibe TUDO que foi escrito: relatos, negs completos (aconteceu + feito +
+           detalhe + aprendizado + responsavel), sugestões. Ordenado por data. */
+        var COR_G='#EA1D2C'; var COR_V='#7C3AED';
+
+        /* Função que extrai todos os registros textuais de um turno */
+        function extrairTudo(registros, pessoa, turnoLabel, cor){
+          var resultado=[];
           registros.forEach(function(d){
-            var negs=d.negs||{};var resps=d.resps||{};
+            var negs=d.negs||{}; var resps=d.resps||{};
+            var dataStr=d.data_fmt||d.data; var horaStr=d.hora||'';
+            var sc=d.score; var st=d.status;
+
+            /* 1. Relato final do turno */
+            if(d.relato&&d.relato.trim()){
+              resultado.push({
+                tipo:'relato', pessoa:pessoa, turno:turnoLabel, cor:cor,
+                data:dataStr, hora:horaStr, score:sc, status:st,
+                conteudo:[{label:'📝 Relato final', texto:d.relato.trim()}]
+              });
+            }
+
+            /* 2. Sugestão */
+            if(d.sugestao&&d.sugestao.atividade&&d.sugestao.atividade.trim()){
+              resultado.push({
+                tipo:'sugestao', pessoa:pessoa, turno:turnoLabel, cor:cor,
+                data:dataStr, hora:horaStr, score:sc, status:st,
+                conteudo:[{label:'💡 Sugestão', texto:d.sugestao.atividade.trim()}]
+              });
+            }
+
+            /* 3. Cada item NÃO — todos os campos de texto */
             Object.keys(resps).forEach(function(id){
               if(resps[id]==='nao'){
                 var neg=negs[id]||{};
-                if(neg.aconteceu||neg.detalhe){
-                  todosNegs.push({pessoa:pessoa,turno:turnoLabel,data:d.data_fmt||d.data,hora:d.hora||'',itemId:id,aconteceu:neg.aconteceu||'',feito:neg.feito||'',detalhe:neg.detalhe||'',prox:neg.prox||''});
+                var linhas=[];
+                if(neg.aconteceu&&neg.aconteceu.trim())linhas.push({label:'O que aconteceu',texto:neg.aconteceu.trim()});
+                if(neg.feito&&neg.feito.trim())linhas.push({label:'O que foi feito',texto:neg.feito.trim()});
+                if(neg.detalhe&&neg.detalhe.trim())linhas.push({label:'Detalhe',texto:neg.detalhe.trim()});
+                if(neg.aprendizado&&neg.aprendizado.trim())linhas.push({label:'💡 O que faria diferente',texto:neg.aprendizado.trim()});
+                if(neg.responsavel&&neg.responsavel.trim())linhas.push({label:'Responsável',texto:neg.responsavel.trim()});
+                var prox=neg.prox||'';
+                if(linhas.length>0){
+                  resultado.push({
+                    tipo:'neg', pessoa:pessoa, turno:turnoLabel, cor:cor,
+                    data:dataStr, hora:horaStr, score:sc, status:st,
+                    itemId:id, prox:prox, conteudo:linhas
+                  });
                 }
               }
             });
           });
+          /* Ordena por data + hora descendente */
+          resultado.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+          return resultado;
         }
-        extrairNegs(subgerData,'Gabriela','🌅 Manhã');
-        extrairNegs(noiteData,'Vitória','🌙 Noite');
 
-        /* Ordena por data desc */
-        itensRelato.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
-        todasSugs.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
-        todosNegs.sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+        var dadosG=extrairTudo(subgerData,'Gabriela','🌅 Manhã',COR_G);
+        var dadosV=extrairTudo(noiteData,'Vitória','🌙 Noite',COR_V);
 
-        var corPessoa={'Gabriela':'#EA1D2C','Vitória':'#7C3AED','Viviane':'#0891B2','Derik':'#1E40AF'};
+        /* Filtro por pessoa */
+        var _filtro=useState('todas');var filtro=_filtro[0];var setFiltro=_filtro[1];
+        var todos=filtro==='G'?dadosG:filtro==='V'?dadosV:[].concat(dadosG,dadosV).sort(function(a,b){return (b.data+b.hora).localeCompare(a.data+a.hora);});
+
+        var totalRelatos=todos.filter(function(x){return x.tipo==='relato';}).length;
+        var totalNegs=todos.filter(function(x){return x.tipo==='neg';}).length;
+        var totalSugs=todos.filter(function(x){return x.tipo==='sugestao';}).length;
 
         return(
-          <div style={{paddingBottom:24}}>
-            {/* Header */}
-            <div style={{margin:'12px 16px 0',background:'#EA1D2C',borderRadius:12,padding:'14px 16px',color:'#fff'}}>
-              <div style={{fontFamily:"'Sora',sans-serif",fontSize:17,fontWeight:900}}>💬 Vozes da Equipe</div>
-              <div style={{fontSize:11,opacity:.75,marginTop:3}}>Relatos, observações, sugestões e ocorrências da equipe</div>
+          <div style={{paddingBottom:32}}>
+            {/* Cabeçalho */}
+            <div style={{margin:'12px 16px 0',background:'#111827',borderRadius:12,padding:'16px',color:'#fff'}}>
+              <div style={{fontFamily:"'Sora',sans-serif",fontSize:16,fontWeight:900,marginBottom:4}}>📋 Relatos da Equipe</div>
+              <div style={{fontSize:11,opacity:.6,marginBottom:12}}>Tudo que foi escrito — relatos, ocorrências, sugestões e aprendizados</div>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8}}>
+                {[{n:totalRelatos,l:'Relatos'},{n:totalNegs,l:'Ocorrências'},{n:totalSugs,l:'Sugestões'}].map(function(x){return(
+                  <div key={x.l} style={{background:'rgba(255,255,255,.08)',borderRadius:8,padding:'8px',textAlign:'center'}}>
+                    <div style={{fontFamily:"'Sora',sans-serif",fontSize:20,fontWeight:900}}>{x.n}</div>
+                    <div style={{fontSize:10,opacity:.6,marginTop:1}}>{x.l}</div>
+                  </div>
+                );})}
+              </div>
             </div>
 
-            {/* Relatos */}
-            <div style={{margin:'14px 16px 0'}}>
-              <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
-                📝 Relatos de turno ({itensRelato.length})
-              </div>
-              {itensRelato.length===0&&<div style={{padding:'18px',background:'#fff',borderRadius:10,border:'1px solid #E5E7EB',textAlign:'center',color:'#9CA3AF',fontSize:12}}>Nenhum relato ainda.</div>}
-              {itensRelato.map(function(r,i){
-                var cor=corPessoa[r.pessoa]||'#EA1D2C';
-                var stBg=r.status==='ok'?'#D1FAE5':r.status==='atencao'?'#FEF3C7':'#FEE2E2';
-                var stC=r.status==='ok'?'#065F46':r.status==='atencao'?'#92400E':'#991B1B';
-                var stL=r.status==='ok'?'OK':r.status==='atencao'?'Atenção':'Crítico';
+            {/* Filtro por pessoa */}
+            <div style={{margin:'10px 16px 0',display:'flex',gap:8}}>
+              {[{v:'todas',l:'Todas'},{v:'G',l:'🌅 Gabriela'},{v:'V',l:'🌙 Vitória'}].map(function(f){return(
+                <button key={f.v} onClick={function(){setFiltro(f.v);}} style={{padding:'7px 14px',borderRadius:99,fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:700,border:'1.5px solid',cursor:'pointer',borderColor:filtro===f.v?'#111827':'#E5E7EB',background:filtro===f.v?'#111827':'#fff',color:filtro===f.v?'#fff':'#374151'}}>
+                  {f.l}
+                </button>
+              );})}
+            </div>
+
+            {/* Lista de registros */}
+            <div style={{margin:'10px 16px 0'}}>
+              {todos.length===0&&(
+                <div style={{padding:'32px',background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',textAlign:'center',color:'#9CA3AF',fontSize:13}}>
+                  Nenhum registro ainda.
+                </div>
+              )}
+              {todos.map(function(item,i){
+                var icone=item.tipo==='relato'?'📝':item.tipo==='sugestao'?'💡':'🔴';
+                var bgCard=item.tipo==='relato'?'#fff':item.tipo==='sugestao'?'#F0F9FF':'#fff';
+                var borderCard=item.tipo==='neg'?'#FECACA':'#E5E7EB';
+                var stBg=item.status==='ok'?'#D1FAE5':item.status==='atencao'?'#FEF3C7':'#FEE2E2';
+                var stC=item.status==='ok'?'#065F46':item.status==='atencao'?'#92400E':'#991B1B';
+                var stL=item.status==='ok'?'OK':item.status==='atencao'?'Atenção':'Crítico';
                 return(
-                  <div key={i} style={{background:'#fff',borderRadius:12,border:'1px solid #E5E7EB',padding:'13px 14px',marginBottom:8,borderLeft:'4px solid '+cor}}>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:6}}>
-                      <div style={{display:'flex',alignItems:'center',gap:6}}>
-                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:cor}}>{r.pessoa}</span>
-                        <span style={{fontSize:11,color:'#6B7280'}}>{r.turno}</span>
-                        <span style={{fontSize:10,color:'#9CA3AF'}}>{r.data}{r.hora?' · '+r.hora:''}</span>
+                  <div key={i} style={{background:bgCard,borderRadius:12,border:'1px solid '+borderCard,padding:'13px 14px',marginBottom:8,borderLeft:'4px solid '+item.cor}}>
+                    {/* Cabeçalho do card */}
+                    <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
+                        <span style={{fontSize:13}}>{icone}</span>
+                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:item.cor}}>{item.pessoa}</span>
+                        <span style={{fontSize:11,color:'#6B7280'}}>{item.turno}</span>
+                        <span style={{fontSize:10,color:'#9CA3AF'}}>{item.data}{item.hora?' · '+item.hora:''}</span>
                       </div>
-                      <div style={{display:'flex',alignItems:'center',gap:6}}>
-                        {r.score!==undefined&&<span style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:900,color:r.score>=80?'#16A34A':r.score>=60?'#D97706':'#DC2626'}}>{r.score}</span>}
+                      <div style={{display:'flex',alignItems:'center',gap:5,flexShrink:0}}>
+                        {item.score!=null&&<span style={{fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:900,color:item.score>=80?'#16A34A':item.score>=60?'#D97706':'#DC2626'}}>{item.score}</span>}
                         <span style={{background:stBg,color:stC,borderRadius:99,padding:'2px 7px',fontSize:9,fontWeight:700}}>{stL}</span>
                       </div>
                     </div>
-                    <div style={{fontSize:13,color:'#111827',lineHeight:1.6,background:'#F9FAFB',borderRadius:8,padding:'10px 12px'}}>{r.texto}</div>
+                    {/* Conteúdo — todos os campos */}
+                    <div style={{display:'flex',flexDirection:'column',gap:6}}>
+                      {item.conteudo.map(function(linha,j){return(
+                        <div key={j} style={{background:'rgba(0,0,0,.03)',borderRadius:8,padding:'8px 10px'}}>
+                          <div style={{fontSize:10,fontWeight:700,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:.4,marginBottom:3}}>{linha.label}</div>
+                          <div style={{fontSize:13,color:'#111827',lineHeight:1.6}}>{linha.texto}</div>
+                        </div>
+                      );})}
+                    </div>
+                    {/* Desfecho se neg */}
+                    {item.tipo==='neg'&&item.prox&&(
+                      <div style={{marginTop:6,fontSize:11,fontWeight:700,color:item.prox==='Sim, fica pendente'?'#D97706':item.prox==='resolvi'?'#16A34A':'#6B7280'}}>
+                        {item.prox==='Sim, fica pendente'?'⚠️ Ficou pendente para o próximo turno':item.prox==='resolvi'?'✅ Resolvido no turno':'📋 Registrado sem resolução'}
+                      </div>
+                    )}
                   </div>
                 );
               })}
             </div>
-
-            {/* Sugestões */}
-            {todasSugs.length>0&&(
-              <div style={{margin:'14px 16px 0'}}>
-                <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
-                  💡 Sugestões da equipe ({todasSugs.length})
-                </div>
-                {todasSugs.map(function(s,i){
-                  var cor=corPessoa[s.pessoa]||'#EA1D2C';
-                  return(
-                    <div key={i} style={{background:'#F0F9FF',borderRadius:12,border:'1px solid #BAE6FD',padding:'13px 14px',marginBottom:8,borderLeft:'4px solid #0891B2'}}>
-                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}>
-                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:800,color:cor}}>{s.pessoa}</span>
-                        <span style={{fontSize:11,color:'#6B7280'}}>{s.turno}</span>
-                        <span style={{fontSize:10,color:'#9CA3AF'}}>{s.data}{s.hora?' · '+s.hora:''}</span>
-                      </div>
-                      <div style={{fontSize:13,color:'#0C4A6E',lineHeight:1.6}}>{s.texto}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Negs detalhados */}
-            {todosNegs.length>0&&(
-              <div style={{margin:'14px 16px 0'}}>
-                <div style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:'#9CA3AF',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>
-                  🔴 Registros detalhados de não conformidade ({todosNegs.length})
-                </div>
-                {todosNegs.slice(0,30).map(function(n,i){
-                  var cor=corPessoa[n.pessoa]||'#EA1D2C';
-                  return(
-                    <div key={i} style={{background:'#fff',borderRadius:10,border:'1px solid #FECACA',padding:'11px 13px',marginBottom:6,borderLeft:'3px solid #DC2626'}}>
-                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:5}}>
-                        <span style={{fontFamily:"'Sora',sans-serif",fontSize:11,fontWeight:800,color:cor}}>{n.pessoa}</span>
-                        <span style={{fontSize:10,color:'#6B7280'}}>{n.turno} · {n.data}</span>
-                      </div>
-                      {n.aconteceu&&<div style={{fontSize:12,color:'#374151',marginBottom:3}}><strong style={{color:'#DC2626'}}>O que:</strong> {n.aconteceu}</div>}
-                      {n.feito&&<div style={{fontSize:12,color:'#374151',marginBottom:3}}><strong>Ação:</strong> {n.feito}</div>}
-                      {n.detalhe&&<div style={{fontSize:12,color:'#6B7280',fontStyle:'italic'}}>{n.detalhe}</div>}
-                      {n.prox&&<div style={{fontSize:11,fontWeight:700,marginTop:4,color:n.prox==='Sim, fica pendente'?'#D97706':'#16A34A'}}>{n.prox==='Sim, fica pendente'?'⚠️ Ficou pendente':'✅ Encerrado'}</div>}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
           </div>
         );
       })()}
@@ -5895,49 +5903,20 @@ function NoiteChecklistScreen(props){
   var falhasTotal=allItems.filter(function(i){return resps[i.id]==='nao';}).length;
   var pct=totalItems>0?Math.round(respondidos/totalItems*100):0;
   var etapaAtual=NOITE_ETAPAS[etapaIdx];
-  /* Horário mínimo por missão — Caminho B: aviso suave, não bloqueio
-     REGRA: informa que está adiantado mas deixa avançar se confirmar
-     Mesa: Frankl (consciência), Maslow (não punir), Gawande (cada fase no tempo certo) */
-  var HORARIO_MINIMO_MISSAO=[0,15,18,21,22]; /* índice = missão-1 */
-  var _avisoHorario=useState(false);var avisoHorario=_avisoHorario[0];var setAvisoHorario=_avisoHorario[1];
-  var _proximaMissao=useState(0);var proximaMissao=_proximaMissao[0];var setProximaMissao=_proximaMissao[1];
-
   function validateEtapa(idx){var etapa=NOITE_ETAPAS[idx];var errs=[];etapa.itens.forEach(function(item){if(!resps[item.id]){errs.push(item.texto);return;}if(resps[item.id]==='nao'&&!validateNoiteNeg(negs[item.id],item.critico)){errs.push(item.texto+' — complete o registro');}});return errs;}
 
   function handleAvancar(){
-    /* Valida itens da etapa atual */
     var errs=validateEtapa(etapaIdx);
     if(errs.length>0){setShowErr(true);window.scrollTo({top:0,behavior:'smooth'});showToast('⚠ Preencha todos os itens');return;}
     setShowErr(false);
-    /* Verifica horário da próxima missão */
     var proxIdx=etapaIdx+1;
     if(proxIdx<NOITE_ETAPAS.length){
-      var horaAtual=new Date().getHours();
-      var horaMinima=HORARIO_MINIMO_MISSAO[proxIdx];
-      if(horaAtual<horaMinima){
-        /* Fora do horário — mostra aviso, aguarda confirmação */
-        setProximaMissao(proxIdx);
-        setAvisoHorario(true);
-        window.scrollTo({top:0,behavior:'smooth'});
-        return;
-      }
       setEtapaIdx(proxIdx);
       window.scrollTo({top:0,behavior:'smooth'});
     }else{
       setScreen('resumo');
       window.scrollTo({top:0,behavior:'smooth'});
     }
-  }
-
-  function handleAvancarConfirmado(){
-    /* Usuária confirmou que quer avançar fora do horário */
-    setAvisoHorario(false);
-    if(proximaMissao<NOITE_ETAPAS.length){
-      setEtapaIdx(proximaMissao);
-    }else{
-      setScreen('resumo');
-    }
-    window.scrollTo({top:0,behavior:'smooth'});
   }
   function handleVoltar(){if(etapaIdx>0){setEtapaIdx(function(i){return i-1;});window.scrollTo({top:0,behavior:'smooth'});}else{setScreen('inicio');}setShowErr(false);}
   async function handleFinalizar(relato){
@@ -6017,41 +5996,6 @@ function NoiteChecklistScreen(props){
       <EnviadoPopup show={enviado} user={user} score={envScore} label='Subgerência Noite'/>
       {sending&&!enviado&&<div className="overlay"><div className="overlay-card"><div className="spin"/><div style={{fontFamily:"'Sora',sans-serif",fontSize:14,fontWeight:800}}>Salvando...</div></div></div>}
       <Toast msg={toast.msg} show={toast.show}/>
-
-      {/* ── MODAL AVISO DE HORÁRIO — Caminho B: informa, não bloqueia ── */}
-      {avisoHorario&&(function(){
-        var proxEtapa=NOITE_ETAPAS[proximaMissao];
-        var horaMinima=HORARIO_MINIMO_MISSAO[proximaMissao];
-        return(
-          <div className="overlay" onClick={function(){setAvisoHorario(false);}}>
-            <div className="overlay-card" onClick={function(e){e.stopPropagation();}} style={{maxWidth:320,textAlign:'left',padding:'24px'}}>
-              <div style={{fontSize:22,marginBottom:10,textAlign:'center'}}>⏰</div>
-              <div style={{fontFamily:"'Sora',sans-serif",fontSize:15,fontWeight:900,color:'var(--ink)',marginBottom:8,textAlign:'center'}}>
-                Hora certa pra isso?
-              </div>
-              <div style={{fontSize:13,color:'var(--ink2)',lineHeight:1.6,marginBottom:16,textAlign:'center'}}>
-                A próxima missão <strong>{proxEtapa.emoji} {proxEtapa.titulo}</strong> é prevista para as <strong>{horaMinima}h</strong>.<br/>
-                Agora são <strong>{new Date().getHours()}h</strong>.
-              </div>
-              <div style={{fontSize:12,color:'var(--ink3)',background:'var(--surface2)',borderRadius:'var(--r8)',padding:'10px 12px',marginBottom:16,lineHeight:1.5}}>
-                Se você está adiantada, pode continuar. Se preferir, volte quando o horário chegar.
-              </div>
-              <div style={{display:'flex',flexDirection:'column',gap:8}}>
-                <button onClick={handleAvancarConfirmado}
-                  style={{width:'100%',padding:'12px',background:'var(--brand)',color:'#fff',borderRadius:'var(--r8)',
-                    fontFamily:"'Sora',sans-serif",fontSize:13,fontWeight:800,border:'none',cursor:'pointer'}}>
-                  Continuar mesmo assim →
-                </button>
-                <button onClick={function(){setAvisoHorario(false);}}
-                  style={{width:'100%',padding:'11px',background:'transparent',color:'var(--ink3)',borderRadius:'var(--r8)',
-                    fontFamily:"'Sora',sans-serif",fontSize:12,fontWeight:600,border:'1px solid var(--line)',cursor:'pointer'}}>
-                  Voltar e aguardar
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })()}
 
       {noiteHdr}
       <div className="prog-card">
